@@ -35,6 +35,7 @@ namespace MyConstruction
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+           
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -81,24 +82,50 @@ namespace MyConstruction
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public   void   OpenChildForm(Form childForm,  object  btnSender)
         {
-            ActivateButton(sender);
+            if(activeForm !=  null)
+                activeForm. Close();
+
+            if(btnSender != null)
+                ActivateButton(btnSender);
+
+            activeForm = childForm;
+            childForm.TopLevel  =  false;
+            childForm.FormBorderStyle  = FormBorderStyle.None;
+            childForm.Dock  = DockStyle.Fill;
+            this.panelDesktopPane.Controls.Add(childForm);
+            this.panelDesktopPane.Tag  = childForm;
+            childForm. BringToFront();
+            childForm. Show();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        public static string path;
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            ActivateButton(sender);
+            DisplayForm dis = new DisplayForm();
+            OpenFileDialog of = new OpenFileDialog();
+            of.Filter = "PDF files(*.pdf)|*.pdf";
+            if (of.ShowDialog() == DialogResult.OK)
+            {
+                path = of.FileName.ToString();
+                OpenChildForm(new DisplayForm(), btnDisplay);
+            }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void btnDisplay_Click(object sender, EventArgs e)
         {
-            ActivateButton(sender);
+            OpenChildForm(new DisplayForm(), sender);
         }
 
-        private void button4_Click_1(object sender, EventArgs e)
+        private void btnEdit_Click(object sender, EventArgs e)
         {
-            ActivateButton(sender);
+            OpenChildForm(new DisplayForm(), sender);
+        }
+
+        private void btnDownload_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new DisplayForm(), sender);
         }
     }
 }

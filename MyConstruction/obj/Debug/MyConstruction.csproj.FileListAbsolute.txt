@@ -7,3 +7,14 @@ C:\ASP.Net2020\MyConstruction\MyConstruction\obj\Debug\MyConstruction.exe
 C:\ASP.Net2020\MyConstruction\MyConstruction\obj\Debug\MyConstruction.pdb
 C:\ASP.Net2020\MyConstruction\MyConstruction\obj\Debug\MyConstruction.LoginForm.resources
 C:\ASP.Net2020\MyConstruction\MyConstruction\obj\Debug\MyConstruction.MainForm.resources
+C:\ASP.Net2020\MyConstruction-Github\MyConstruction\bin\Debug\MyConstruction.exe.config
+C:\ASP.Net2020\MyConstruction-Github\MyConstruction\obj\Debug\MyConstruction.exe
+C:\ASP.Net2020\MyConstruction-Github\MyConstruction\obj\Debug\MyConstruction.pdb
+C:\ASP.Net2020\MyConstruction-Github\MyConstruction\bin\Debug\MyConstruction.exe
+C:\ASP.Net2020\MyConstruction-Github\MyConstruction\bin\Debug\MyConstruction.pdb
+C:\ASP.Net2020\MyConstruction-Github\MyConstruction\obj\Debug\MyConstruction.csprojResolveAssemblyReference.cache
+C:\ASP.Net2020\MyConstruction-Github\MyConstruction\obj\Debug\MyConstruction.LoginForm.resources
+C:\ASP.Net2020\MyConstruction-Github\MyConstruction\obj\Debug\MyConstruction.MainForm.resources
+C:\ASP.Net2020\MyConstruction-Github\MyConstruction\obj\Debug\MyConstruction.Properties.Resources.resources
+C:\ASP.Net2020\MyConstruction-Github\MyConstruction\obj\Debug\MyConstruction.csproj.GenerateResource.Cache
+C:\ASP.Net2020\MyConstruction-Github\MyConstruction\obj\Debug\MyConstruction.DisplayForm.resources
