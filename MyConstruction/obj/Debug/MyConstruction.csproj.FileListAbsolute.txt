@@ -18,3 +18,5 @@ C:\ASP.Net2020\MyConstruction-Github\MyConstruction\obj\Debug\MyConstruction.Mai
 C:\ASP.Net2020\MyConstruction-Github\MyConstruction\obj\Debug\MyConstruction.Properties.Resources.resources
 C:\ASP.Net2020\MyConstruction-Github\MyConstruction\obj\Debug\MyConstruction.csproj.GenerateResource.Cache
 C:\ASP.Net2020\MyConstruction-Github\MyConstruction\obj\Debug\MyConstruction.DisplayForm.resources
+C:\ASP.Net2020\MyConstruction-Github\MyConstruction\bin\Debug\itextsharp.dll
+C:\ASP.Net2020\MyConstruction-Github\MyConstruction\obj\Debug\MyConstruction.EditForm.resources

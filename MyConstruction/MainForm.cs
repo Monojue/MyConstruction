@@ -15,6 +15,7 @@ namespace MyConstruction
     {
         private Button currentButton;
         private Form activeForm;
+        public static string finaltext = "";
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
@@ -34,8 +35,7 @@ namespace MyConstruction
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None;
-            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
-           
+            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));      
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -54,7 +54,7 @@ namespace MyConstruction
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private   void   ActivateButton(object  btnSender)
+        private void ActivateButton(object  btnSender)
         {
             if   (btnSender !=  null)
             {
@@ -69,7 +69,7 @@ namespace MyConstruction
             }
         }
 
-        private   void   DisableButton()
+        private void DisableButton()
         {
             foreach   (Control previousBtn  in  panelMenu. Controls)
             {
@@ -103,29 +103,50 @@ namespace MyConstruction
         public static string path;
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            DisplayForm dis = new DisplayForm();
             OpenFileDialog of = new OpenFileDialog();
             of.Filter = "PDF files(*.pdf)|*.pdf";
             if (of.ShowDialog() == DialogResult.OK)
             {
                 path = of.FileName.ToString();
-                OpenChildForm(new DisplayForm(), btnDisplay);
+                if (sender.Equals(btnDisplay))
+                {
+                    OpenChildForm(new DisplayForm(), btnDisplay);
+                }
+                else if (sender.Equals(btnEdit))
+                {
+                    OpenChildForm(new EditForm(), btnEdit);
+                }
+                
             }
         }
 
         private void btnDisplay_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new DisplayForm(), sender);
+            if (finaltext.Equals(""))
+            {
+                btnAdd_Click(sender, e);
+            }
+            else
+            {
+                OpenChildForm(new DisplayForm(), sender);
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new DisplayForm(), sender);
+            if (finaltext.Equals(""))
+            {
+                btnAdd_Click(sender, e);
+            }
+            else
+            {
+                OpenChildForm(new EditForm(), sender);
+            }
         }
 
         private void btnDownload_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new DisplayForm(), sender);
+            //OpenChildForm(new DisplayForm(), sender);
         }
     }
 }

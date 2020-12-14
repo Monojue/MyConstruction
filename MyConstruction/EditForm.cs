@@ -12,12 +12,12 @@ using iTextSharp.text.pdf.parser;
 
 namespace MyConstruction
 {
-    public partial class DisplayForm : Form
+    public partial class EditForm : Form
     {
         string finaltext = MainForm.finaltext;
         List<string> sptext;
 
-        public DisplayForm()
+        public EditForm()
         {
             InitializeComponent();
             lblPath.Text = MainForm.path;
@@ -34,7 +34,6 @@ namespace MyConstruction
                 setData();
                 pbar.Value = 100;
             }
-            
         }
 
 
@@ -55,7 +54,7 @@ namespace MyConstruction
                         builder.Append(s);
                     }
                 }
-                
+                dataextract(builder.ToString());
                 //finaltext = getdata("Construction Name");
                 MainForm.finaltext = finaltext = builder.ToString();
             }
@@ -114,12 +113,6 @@ namespace MyConstruction
             //MessageBox.Show("Complete", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            pbar.Value = e.ProgressPercentage;
-            pbar.Update();
-        }
-
         public void setData()
         {
             try
@@ -131,8 +124,8 @@ namespace MyConstruction
                 lblConSite.Text = getdataup("Construction Site");
                 lblConOutline.Text = getdatadown("Outline of Construction");
                 lblEstiAmount.Text = getdataup("Estimate Amount");
-                lblstartDate.Text = DateTime.Now.ToShortDateString();
-                lblEndDate.Text = DateTime.Now.AddMonths(1).ToShortDateString();
+                startPicker.Value = DateTime.Now;
+                endPicker.Value = DateTime.Now.AddMonths(1);
                 lblTotalDate.Text = ((DateTime.Now.AddMonths(1) - DateTime.Now).TotalDays + 1).ToString();
             }
             catch (Exception)
@@ -143,6 +136,11 @@ namespace MyConstruction
             
         }
 
+        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            pbar.Value = e.ProgressPercentage;
+            pbar.Update();
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -164,6 +162,19 @@ namespace MyConstruction
                     backgroundWorker.RunWorkerAsync();
                 }
             }
+        }
+
+
+        private void startPicker_ValueChanged(object sender, EventArgs e)
+        {
+            endPicker.Value = startPicker.Value.AddMonths(1);
+            lblTotalDate.Text = ((endPicker.Value - startPicker.Value).TotalDays + 1).ToString();
+        }
+
+        private void endPicker_ValueChanged(object sender, EventArgs e)
+        {
+            startPicker.Value = endPicker.Value.AddMonths(-1);
+            lblTotalDate.Text = ((endPicker.Value - startPicker.Value).TotalDays + 1).ToString();
         }
 
     }
