@@ -20,3 +20,6 @@ C:\ASP.Net2020\MyConstruction-Github\MyConstruction\obj\Debug\MyConstruction.csp
 C:\ASP.Net2020\MyConstruction-Github\MyConstruction\obj\Debug\MyConstruction.DisplayForm.resources
 C:\ASP.Net2020\MyConstruction-Github\MyConstruction\bin\Debug\itextsharp.dll
 C:\ASP.Net2020\MyConstruction-Github\MyConstruction\obj\Debug\MyConstruction.EditForm.resources
+C:\ASP.Net2020\MyConstruction-Github\MyConstruction\obj\Debug\MyConstruction.setting.resources
+C:\ASP.Net2020\MyConstruction-Github\MyConstruction\bin\Debug\itextsharp.pdfa.dll
+C:\ASP.Net2020\MyConstruction-Github\MyConstruction\bin\Debug\itextsharp.xtra.dll

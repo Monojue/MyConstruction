@@ -16,6 +16,9 @@ namespace MyConstruction
         private Button currentButton;
         private Form activeForm;
         public static string finaltext = "";
+        public static Boolean editdatachanged = false;
+        public static Boolean firsttime = true;
+        public static int lib = 0;
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
@@ -35,7 +38,16 @@ namespace MyConstruction
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None;
-            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));      
+            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+
+            if (MainForm.lib == 0)
+            {
+                rdo1.Checked = true;
+            }
+            else if (MainForm.lib == 1)
+            {
+                rdo2.Checked = true;
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -82,7 +94,7 @@ namespace MyConstruction
             }
         }
 
-        public   void   OpenChildForm(Form childForm,  object  btnSender)
+        public void OpenChildForm(Form childForm,  object  btnSender)
         {
             if(activeForm !=  null)
                 activeForm. Close();
@@ -108,13 +120,13 @@ namespace MyConstruction
             if (of.ShowDialog() == DialogResult.OK)
             {
                 path = of.FileName.ToString();
-                if (sender.Equals(btnDisplay))
-                {
-                    OpenChildForm(new DisplayForm(), btnDisplay);
-                }
-                else if (sender.Equals(btnEdit))
+                if (sender.Equals(btnEdit))
                 {
                     OpenChildForm(new EditForm(), btnEdit);
+                }
+                else
+                {
+                    OpenChildForm(new DisplayForm(), btnDisplay);
                 }
                 
             }
@@ -128,7 +140,17 @@ namespace MyConstruction
             }
             else
             {
-                OpenChildForm(new DisplayForm(), sender);
+                if (editdatachanged)
+                {
+                    if (MessageBox.Show("Your Changed Data will be lost!", "Are you sure?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                    {
+                        OpenChildForm(new DisplayForm(), sender);
+                    }
+                }
+                else
+                {
+                    OpenChildForm(new DisplayForm(), sender);
+                }
             }
         }
 
@@ -144,9 +166,16 @@ namespace MyConstruction
             }
         }
 
-        private void btnDownload_Click(object sender, EventArgs e)
+        private void rdo1_CheckedChanged(object sender, EventArgs e)
         {
-            //OpenChildForm(new DisplayForm(), sender);
+            MainForm.lib = 0;
         }
+
+        private void rdo2_CheckedChanged(object sender, EventArgs e)
+        {
+            MainForm.lib = 1;
+        }
+
+
     }
 }

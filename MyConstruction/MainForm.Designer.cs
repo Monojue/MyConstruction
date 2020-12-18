@@ -30,28 +30,31 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnDisplay = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panelTop = new System.Windows.Forms.Panel();
             this.btnMin = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.panelDesktopPane = new System.Windows.Forms.Panel();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.label2 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.btnDownload = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnDisplay = new System.Windows.Forms.Button();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.box = new System.Windows.Forms.GroupBox();
+            this.rdo2 = new System.Windows.Forms.RadioButton();
+            this.rdo1 = new System.Windows.Forms.RadioButton();
             this.panelMenu.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelTop.SuspendLayout();
             this.panelDesktopPane.SuspendLayout();
+            this.box.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMenu
             // 
             this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
-            this.panelMenu.Controls.Add(this.btnDownload);
+            this.panelMenu.Controls.Add(this.box);
             this.panelMenu.Controls.Add(this.btnEdit);
             this.panelMenu.Controls.Add(this.btnDisplay);
             this.panelMenu.Controls.Add(this.panel2);
@@ -60,6 +63,44 @@
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(200, 700);
             this.panelMenu.TabIndex = 0;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
+            this.btnEdit.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnEdit.FlatAppearance.BorderSize = 0;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.btnEdit.ForeColor = System.Drawing.Color.White;
+            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEdit.Location = new System.Drawing.Point(0, 120);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnEdit.Size = new System.Drawing.Size(200, 50);
+            this.btnEdit.TabIndex = 3;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnDisplay
+            // 
+            this.btnDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
+            this.btnDisplay.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnDisplay.FlatAppearance.BorderSize = 0;
+            this.btnDisplay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDisplay.ForeColor = System.Drawing.Color.White;
+            this.btnDisplay.Image = global::MyConstruction.Properties.Resources.output_onlinepngtools;
+            this.btnDisplay.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDisplay.Location = new System.Drawing.Point(0, 70);
+            this.btnDisplay.Name = "btnDisplay";
+            this.btnDisplay.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnDisplay.Size = new System.Drawing.Size(200, 50);
+            this.btnDisplay.TabIndex = 1;
+            this.btnDisplay.Text = "Display";
+            this.btnDisplay.UseVisualStyleBackColor = false;
+            this.btnDisplay.Click += new System.EventHandler(this.btnDisplay_Click);
             // 
             // panel2
             // 
@@ -77,7 +118,7 @@
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label1.Font = new System.Drawing.Font("Poor Richard", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(12, 12);
+            this.label1.Location = new System.Drawing.Point(11, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(180, 30);
             this.label1.TabIndex = 0;
@@ -135,10 +176,6 @@
             this.panelDesktopPane.Size = new System.Drawing.Size(1000, 630);
             this.panelDesktopPane.TabIndex = 2;
             // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -165,62 +202,56 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // btnDownload
+            // openFileDialog
             // 
-            this.btnDownload.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
-            this.btnDownload.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnDownload.FlatAppearance.BorderSize = 0;
-            this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDownload.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDownload.ForeColor = System.Drawing.Color.White;
-            this.btnDownload.Image = ((System.Drawing.Image)(resources.GetObject("btnDownload.Image")));
-            this.btnDownload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDownload.Location = new System.Drawing.Point(0, 170);
-            this.btnDownload.Name = "btnDownload";
-            this.btnDownload.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnDownload.Size = new System.Drawing.Size(200, 50);
-            this.btnDownload.TabIndex = 4;
-            this.btnDownload.Text = "Download";
-            this.btnDownload.UseVisualStyleBackColor = false;
-            this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
+            this.openFileDialog.FileName = "openFileDialog";
             // 
-            // btnEdit
+            // box
             // 
-            this.btnEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
-            this.btnEdit.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnEdit.FlatAppearance.BorderSize = 0;
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.btnEdit.ForeColor = System.Drawing.Color.White;
-            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
-            this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEdit.Location = new System.Drawing.Point(0, 120);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnEdit.Size = new System.Drawing.Size(200, 50);
-            this.btnEdit.TabIndex = 3;
-            this.btnEdit.Text = "Edit";
-            this.btnEdit.UseVisualStyleBackColor = false;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            this.box.Controls.Add(this.rdo2);
+            this.box.Controls.Add(this.rdo1);
+            this.box.Dock = System.Windows.Forms.DockStyle.Top;
+            this.box.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.box.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.box.ForeColor = System.Drawing.Color.White;
+            this.box.Location = new System.Drawing.Point(0, 170);
+            this.box.Margin = new System.Windows.Forms.Padding(10);
+            this.box.Name = "box";
+            this.box.Padding = new System.Windows.Forms.Padding(10);
+            this.box.Size = new System.Drawing.Size(200, 97);
+            this.box.TabIndex = 4;
+            this.box.TabStop = false;
+            this.box.Text = "PDF setting";
             // 
-            // btnDisplay
+            // rdo2
             // 
-            this.btnDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
-            this.btnDisplay.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnDisplay.FlatAppearance.BorderSize = 0;
-            this.btnDisplay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDisplay.ForeColor = System.Drawing.Color.White;
-            this.btnDisplay.Image = global::MyConstruction.Properties.Resources.output_onlinepngtools;
-            this.btnDisplay.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDisplay.Location = new System.Drawing.Point(0, 70);
-            this.btnDisplay.Name = "btnDisplay";
-            this.btnDisplay.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnDisplay.Size = new System.Drawing.Size(200, 50);
-            this.btnDisplay.TabIndex = 1;
-            this.btnDisplay.Text = "Display";
-            this.btnDisplay.UseVisualStyleBackColor = false;
-            this.btnDisplay.Click += new System.EventHandler(this.btnDisplay_Click);
+            this.rdo2.AutoSize = true;
+            this.rdo2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.rdo2.Location = new System.Drawing.Point(10, 55);
+            this.rdo2.Margin = new System.Windows.Forms.Padding(5);
+            this.rdo2.Name = "rdo2";
+            this.rdo2.Padding = new System.Windows.Forms.Padding(5);
+            this.rdo2.Size = new System.Drawing.Size(180, 30);
+            this.rdo2.TabIndex = 1;
+            this.rdo2.TabStop = true;
+            this.rdo2.Text = "Method 2";
+            this.rdo2.UseVisualStyleBackColor = true;
+            this.rdo2.CheckedChanged += new System.EventHandler(this.rdo2_CheckedChanged);
+            // 
+            // rdo1
+            // 
+            this.rdo1.AutoSize = true;
+            this.rdo1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.rdo1.Location = new System.Drawing.Point(10, 25);
+            this.rdo1.Margin = new System.Windows.Forms.Padding(5);
+            this.rdo1.Name = "rdo1";
+            this.rdo1.Padding = new System.Windows.Forms.Padding(5);
+            this.rdo1.Size = new System.Drawing.Size(180, 30);
+            this.rdo1.TabIndex = 0;
+            this.rdo1.TabStop = true;
+            this.rdo1.Text = "Method 1";
+            this.rdo1.UseVisualStyleBackColor = true;
+            this.rdo1.CheckedChanged += new System.EventHandler(this.rdo1_CheckedChanged);
             // 
             // MainForm
             // 
@@ -241,6 +272,8 @@
             this.panelTop.ResumeLayout(false);
             this.panelDesktopPane.ResumeLayout(false);
             this.panelDesktopPane.PerformLayout();
+            this.box.ResumeLayout(false);
+            this.box.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -251,7 +284,6 @@
         private System.Windows.Forms.Button btnDisplay;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panelTop;
-        private System.Windows.Forms.Button btnDownload;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnMin;
@@ -260,5 +292,8 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox box;
+        private System.Windows.Forms.RadioButton rdo2;
+        private System.Windows.Forms.RadioButton rdo1;
     }
 }

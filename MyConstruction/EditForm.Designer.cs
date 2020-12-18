@@ -55,15 +55,17 @@
             this.lblTotalDate = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.lblRemark = new System.Windows.Forms.RichTextBox();
             this.lblReason = new System.Windows.Forms.RichTextBox();
             this.lblConNo = new System.Windows.Forms.TextBox();
             this.lblConSite = new System.Windows.Forms.TextBox();
             this.lblEstiAmount = new System.Windows.Forms.TextBox();
             this.tableMain = new System.Windows.Forms.TableLayoutPanel();
+            this.endPicker = new System.Windows.Forms.DateTimePicker();
             this.lblPhone = new System.Windows.Forms.TextBox();
             this.startPicker = new System.Windows.Forms.DateTimePicker();
-            this.endPicker = new System.Windows.Forms.DateTimePicker();
+            this.btnReset = new System.Windows.Forms.Button();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.panelbottom.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -151,6 +153,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btnReset);
             this.panel2.Controls.Add(this.btnOpen);
             this.panel2.Controls.Add(this.btnDownload);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -176,13 +179,14 @@
             // btnDownload
             // 
             this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDownload.Location = new System.Drawing.Point(332, 1);
+            this.btnDownload.Location = new System.Drawing.Point(428, 1);
             this.btnDownload.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
             this.btnDownload.Name = "btnDownload";
             this.btnDownload.Size = new System.Drawing.Size(75, 25);
             this.btnDownload.TabIndex = 0;
             this.btnDownload.Text = "Download";
             this.btnDownload.UseVisualStyleBackColor = true;
+            this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
             // 
             // openFileDialog
             // 
@@ -198,6 +202,7 @@
             this.lblConName.Name = "lblConName";
             this.lblConName.Size = new System.Drawing.Size(722, 23);
             this.lblConName.TabIndex = 30;
+            this.lblConName.TextChanged += new System.EventHandler(this.lblConName_TextChanged);
             // 
             // lblConOutline
             // 
@@ -210,6 +215,7 @@
             this.lblConOutline.Size = new System.Drawing.Size(722, 58);
             this.lblConOutline.TabIndex = 25;
             this.lblConOutline.Text = "";
+            this.lblConOutline.TextChanged += new System.EventHandler(this.lblConOutline_TextChanged);
             // 
             // label14
             // 
@@ -397,17 +403,18 @@
             this.label5.Text = "Construction Period";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // richTextBox1
+            // lblRemark
             // 
-            this.richTextBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.tableMain.SetColumnSpan(this.richTextBox1, 8);
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.richTextBox1.Location = new System.Drawing.Point(239, 378);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(722, 84);
-            this.richTextBox1.TabIndex = 28;
-            this.richTextBox1.Text = "";
+            this.lblRemark.BackColor = System.Drawing.SystemColors.Control;
+            this.tableMain.SetColumnSpan(this.lblRemark, 8);
+            this.lblRemark.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblRemark.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblRemark.Location = new System.Drawing.Point(239, 378);
+            this.lblRemark.Name = "lblRemark";
+            this.lblRemark.Size = new System.Drawing.Size(722, 84);
+            this.lblRemark.TabIndex = 28;
+            this.lblRemark.Text = "";
+            this.lblRemark.TextChanged += new System.EventHandler(this.lblRemark_TextChanged);
             // 
             // lblReason
             // 
@@ -420,6 +427,7 @@
             this.lblReason.Size = new System.Drawing.Size(722, 78);
             this.lblReason.TabIndex = 29;
             this.lblReason.Text = "";
+            this.lblReason.TextChanged += new System.EventHandler(this.lblReason_TextChanged);
             // 
             // lblConNo
             // 
@@ -431,6 +439,7 @@
             this.lblConNo.Name = "lblConNo";
             this.lblConNo.Size = new System.Drawing.Size(722, 23);
             this.lblConNo.TabIndex = 31;
+            this.lblConNo.TextChanged += new System.EventHandler(this.lblConNo_TextChanged);
             // 
             // lblConSite
             // 
@@ -442,6 +451,7 @@
             this.lblConSite.Name = "lblConSite";
             this.lblConSite.Size = new System.Drawing.Size(722, 23);
             this.lblConSite.TabIndex = 32;
+            this.lblConSite.TextChanged += new System.EventHandler(this.lblConSite_TextChanged);
             // 
             // lblEstiAmount
             // 
@@ -452,6 +462,7 @@
             this.lblEstiAmount.Name = "lblEstiAmount";
             this.lblEstiAmount.Size = new System.Drawing.Size(722, 23);
             this.lblEstiAmount.TabIndex = 33;
+            this.lblEstiAmount.TextChanged += new System.EventHandler(this.lblEstiAmount_TextChanged);
             // 
             // tableMain
             // 
@@ -471,7 +482,7 @@
             this.tableMain.Controls.Add(this.lblConSite, 1, 2);
             this.tableMain.Controls.Add(this.lblConNo, 1, 1);
             this.tableMain.Controls.Add(this.lblReason, 1, 7);
-            this.tableMain.Controls.Add(this.richTextBox1, 1, 8);
+            this.tableMain.Controls.Add(this.lblRemark, 1, 8);
             this.tableMain.Controls.Add(this.label5, 0, 4);
             this.tableMain.Controls.Add(this.label23, 1, 4);
             this.tableMain.Controls.Add(this.lblTotalDate, 6, 4);
@@ -508,6 +519,18 @@
             this.tableMain.Size = new System.Drawing.Size(984, 470);
             this.tableMain.TabIndex = 5;
             // 
+            // endPicker
+            // 
+            this.endPicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.endPicker.CustomFormat = "yyyy/MM/dd";
+            this.endPicker.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.endPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.endPicker.Location = new System.Drawing.Point(487, 187);
+            this.endPicker.Name = "endPicker";
+            this.endPicker.Size = new System.Drawing.Size(138, 23);
+            this.endPicker.TabIndex = 36;
+            this.endPicker.ValueChanged += new System.EventHandler(this.endPicker_ValueChanged);
+            // 
             // lblPhone
             // 
             this.lblPhone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -517,6 +540,7 @@
             this.lblPhone.Name = "lblPhone";
             this.lblPhone.Size = new System.Drawing.Size(722, 23);
             this.lblPhone.TabIndex = 34;
+            this.lblPhone.TextChanged += new System.EventHandler(this.lblPhone_TextChanged);
             // 
             // startPicker
             // 
@@ -530,17 +554,18 @@
             this.startPicker.TabIndex = 35;
             this.startPicker.ValueChanged += new System.EventHandler(this.startPicker_ValueChanged);
             // 
-            // endPicker
+            // btnReset
             // 
-            this.endPicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.endPicker.CustomFormat = "yyyy/MM/dd";
-            this.endPicker.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.endPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.endPicker.Location = new System.Drawing.Point(487, 187);
-            this.endPicker.Name = "endPicker";
-            this.endPicker.Size = new System.Drawing.Size(138, 23);
-            this.endPicker.TabIndex = 36;
-            this.endPicker.ValueChanged += new System.EventHandler(this.endPicker_ValueChanged);
+            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReset.Location = new System.Drawing.Point(335, 1);
+            this.btnReset.Margin = new System.Windows.Forms.Padding(0);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
+            this.btnReset.Size = new System.Drawing.Size(75, 25);
+            this.btnReset.TabIndex = 2;
+            this.btnReset.Text = "Reset";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // EditForm
             // 
@@ -584,7 +609,7 @@
         private System.Windows.Forms.TextBox lblConSite;
         private System.Windows.Forms.TextBox lblConNo;
         private System.Windows.Forms.RichTextBox lblReason;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox lblRemark;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label lblTotalDate;
@@ -603,5 +628,7 @@
         private System.Windows.Forms.TextBox lblPhone;
         private System.Windows.Forms.DateTimePicker endPicker;
         private System.Windows.Forms.DateTimePicker startPicker;
+        private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }

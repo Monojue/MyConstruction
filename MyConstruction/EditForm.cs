@@ -15,7 +15,9 @@ namespace MyConstruction
     public partial class EditForm : Form
     {
         string finaltext = MainForm.finaltext;
-        List<string> sptext;
+        //List<string> sptext;
+        Method method = new Method();
+        Boolean firsttime = true;
 
         public EditForm()
         {
@@ -36,69 +38,11 @@ namespace MyConstruction
             }
         }
 
-
-        public void iTextSharp()
-        {
-            using (PdfReader reader = new PdfReader(lblPath.Text))
-            {
-                StringBuilder builder = new StringBuilder();
-                for (int i = 1; i <= reader.NumberOfPages; i++)
-                {
-                    if (!backgroundWorker.CancellationPending)
-                    {
-                        backgroundWorker.ReportProgress((i * 100) / reader.NumberOfPages);
-                        //bulider.Append(PdfTextExtractor.GetTextFromPage(reader, i));
-                        ITextExtractionStrategy its = new iTextSharp.text.pdf.parser.LocationTextExtractionStrategy();
-                        string s = PdfTextExtractor.GetTextFromPage(reader, i, its);
-                        //s = Encoding.UTF8.GetString(ASCIIEncoding.Convert(Encoding.Default, Encoding.UTF8, Encoding.Default.GetBytes(s)));
-                        builder.Append(s);
-                    }
-                }
-                dataextract(builder.ToString());
-                //finaltext = getdata("Construction Name");
-                MainForm.finaltext = finaltext = builder.ToString();
-            }
-        }
-
-        public void dataextract(string data)
-        {
-            sptext = data.Split(new[] { "\n" }, StringSplitOptions.None).ToList();
-        }
-
-        public string getdataup(string key)
-        {
-            for (int i = 0; i < sptext.Count; i++)
-            {
-                if (sptext[i].Contains(key))
-                {
-                    return sptext[i - 1];
-                }
-            }
-            return "Empty";
-        }
-
-        public string getdatadown(string key)
-        {
-            string data = "";
-            for (int i = 0; i < sptext.Count; i++)
-            {
-                if (sptext[i].Contains(key))
-                {
-                    for (int j=i+1; j < sptext.Count; j++)
-                    {
-                        data = data +"\n"+ sptext[j];
-                    }
-                    return data;
-                }
-            }
-            return "Empty";
-        }
-
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
-                 iTextSharp();
+                method.runExtractor(backgroundWorker, lblPath.Text);
             }
             catch (Exception ex)
             {
@@ -109,6 +53,7 @@ namespace MyConstruction
 
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            method.putData();
             setData();
             //MessageBox.Show("Complete", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -117,23 +62,37 @@ namespace MyConstruction
         {
             try
             {
-                dataextract(finaltext);
-                lblTitle.Text = sptext[0];
-                lblConName.Text = getdataup("Construction Name");
-                lblConNo.Text = getdataup("Construction No").Substring(0, getdataup("Construction No").IndexOf(" "));
-                lblConSite.Text = getdataup("Construction Site");
-                lblConOutline.Text = getdatadown("Outline of Construction");
-                lblEstiAmount.Text = getdataup("Estimate Amount");
+                lblTitle.Text = Method.word[0];
+                lblConName.Text = Method.word[1];
+                lblConNo.Text = Method.word[2];
+                lblConSite.Text = Method.word[3];
+                lblConOutline.Text = Method.word[4];
+                lblEstiAmount.Text = Method.word[5];
+                lblPhone.Text = Method.word[6];
+                lblReason.Text = Method.word[7];
+                lblRemark.Text = Method.word[8];
+
+                startPicker.Value = DateTime.Now;
+                endPicker.Value = DateTime.Now.AddMonths(1);
+                lblTotalDate.Text = ((DateTime.Now.AddMonths(1) - DateTime.Now).TotalDays + 1).ToString();
+                firsttime = false;
+            }
+            catch (Exception)
+            {
+                lblTitle.Text = "";
+                lblConName.Text = "";
+                lblConNo.Text = "";
+                lblConSite.Text = "";
+                lblConOutline.Text = "";
+                lblEstiAmount.Text = "";
+                lblPhone.Text = "";
+                lblReason.Text = "";
+                lblRemark.Text = "";
+
                 startPicker.Value = DateTime.Now;
                 endPicker.Value = DateTime.Now.AddMonths(1);
                 lblTotalDate.Text = ((DateTime.Now.AddMonths(1) - DateTime.Now).TotalDays + 1).ToString();
             }
-            catch (Exception)
-            {
-                MessageBox.Show("PDF setting Wrong!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-            
         }
 
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -167,14 +126,97 @@ namespace MyConstruction
 
         private void startPicker_ValueChanged(object sender, EventArgs e)
         {
-            endPicker.Value = startPicker.Value.AddMonths(1);
-            lblTotalDate.Text = ((endPicker.Value - startPicker.Value).TotalDays + 1).ToString();
+            if(!firsttime)
+                MainForm.editdatachanged = true;
+
+            lblTotalDate.Text = Math.Round((endPicker.Value - startPicker.Value).TotalDays + 1).ToString();
         }
 
         private void endPicker_ValueChanged(object sender, EventArgs e)
         {
-            startPicker.Value = endPicker.Value.AddMonths(-1);
-            lblTotalDate.Text = ((endPicker.Value - startPicker.Value).TotalDays + 1).ToString();
+            if (!firsttime)
+                MainForm.editdatachanged = true;
+
+            lblTotalDate.Text = Math.Round((endPicker.Value - startPicker.Value).TotalDays + 1).ToString();
+        }
+
+        private void btnDownload_Click(object sender, EventArgs e)
+        {
+            List<string> update = new List<string>();
+
+            update.Add(lblTitle.Text);
+            update.Add(lblConName.Text);
+            update.Add(lblConNo.Text);
+            update.Add(lblConSite.Text);
+            update.Add(lblConOutline.Text);
+            update.Add(startPicker.Text);
+            update.Add(endPicker.Text);
+            update.Add(lblTotalDate.Text);
+            update.Add(lblEstiAmount.Text);
+            update.Add(lblPhone.Text);
+            update.Add(lblReason.Text);
+            update.Add(lblRemark.Text);
+
+            string fname = lblPath.Text.ToString();
+            saveFileDialog.FileName = fname.Substring(fname.LastIndexOf(@"\") + 1).Replace(".pdf","") + "(Edit)";
+            saveFileDialog.Filter = "PDF files(*.pdf)|*.pdf";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                method.createPDF(update, saveFileDialog.FileName.ToString());
+            }
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            setData();
+        }
+
+        private void lblConName_TextChanged(object sender, EventArgs e)
+        {
+            if (!firsttime)
+                MainForm.editdatachanged = true;
+        }
+
+        private void lblConNo_TextChanged(object sender, EventArgs e)
+        {
+            if (!firsttime)
+                MainForm.editdatachanged = true;
+        }
+
+        private void lblConOutline_TextChanged(object sender, EventArgs e)
+        {
+            if (!firsttime)
+                MainForm.editdatachanged = true;
+        }
+
+        private void lblEstiAmount_TextChanged(object sender, EventArgs e)
+        {
+            if (!firsttime)
+                MainForm.editdatachanged = true;
+        }
+
+        private void lblPhone_TextChanged(object sender, EventArgs e)
+        {
+            if (!firsttime)
+                MainForm.editdatachanged = true;
+        }
+
+        private void lblReason_TextChanged(object sender, EventArgs e)
+        {
+            if (!firsttime)
+                MainForm.editdatachanged = true;
+        }
+
+        private void lblRemark_TextChanged(object sender, EventArgs e)
+        {
+            if (!firsttime)
+                MainForm.editdatachanged = true;
+        }
+
+        private void lblConSite_TextChanged(object sender, EventArgs e)
+        {
+            if (!firsttime)
+                MainForm.editdatachanged = true;
         }
 
     }

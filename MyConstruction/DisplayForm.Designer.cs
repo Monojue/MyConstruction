@@ -39,13 +39,15 @@
             this.btnOpen = new System.Windows.Forms.Button();
             this.btnDownload = new System.Windows.Forms.Button();
             this.tableMain = new System.Windows.Forms.TableLayoutPanel();
+            this.endPicker = new System.Windows.Forms.DateTimePicker();
+            this.startPicker = new System.Windows.Forms.DateTimePicker();
+            this.lblReason = new System.Windows.Forms.RichTextBox();
+            this.lblRemark = new System.Windows.Forms.RichTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.lblTotalDate = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
-            this.lblEndDate = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.lblstartDate = new System.Windows.Forms.Label();
             this.lblPhone = new System.Windows.Forms.Label();
             this.lblEstiAmount = new System.Windows.Forms.Label();
             this.lblConSite = new System.Windows.Forms.Label();
@@ -62,8 +64,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.lblConOutline = new System.Windows.Forms.RichTextBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.lblReason = new System.Windows.Forms.RichTextBox();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.panelbottom.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -110,7 +111,7 @@
             this.panel1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(984, 65);
+            this.panel1.Size = new System.Drawing.Size(984, 50);
             this.panel1.TabIndex = 2;
             // 
             // tableLayoutPanel1
@@ -125,7 +126,7 @@
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(984, 65);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(984, 50);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // lblTitle
@@ -136,7 +137,7 @@
             this.lblTitle.Location = new System.Drawing.Point(0, 0);
             this.lblTitle.Margin = new System.Windows.Forms.Padding(0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(984, 65);
+            this.lblTitle.Size = new System.Drawing.Size(984, 50);
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "Construction ";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -183,6 +184,7 @@
             this.btnDownload.TabIndex = 0;
             this.btnDownload.Text = "Download";
             this.btnDownload.UseVisualStyleBackColor = true;
+            this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
             // 
             // tableMain
             // 
@@ -196,15 +198,15 @@
             this.tableMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.07009F));
             this.tableMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.163669F));
             this.tableMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2.712616F));
+            this.tableMain.Controls.Add(this.endPicker, 4, 4);
+            this.tableMain.Controls.Add(this.startPicker, 2, 4);
             this.tableMain.Controls.Add(this.lblReason, 1, 7);
-            this.tableMain.Controls.Add(this.richTextBox1, 1, 8);
+            this.tableMain.Controls.Add(this.lblRemark, 1, 8);
             this.tableMain.Controls.Add(this.label5, 0, 4);
             this.tableMain.Controls.Add(this.label23, 1, 4);
             this.tableMain.Controls.Add(this.lblTotalDate, 6, 4);
             this.tableMain.Controls.Add(this.label21, 5, 4);
-            this.tableMain.Controls.Add(this.lblEndDate, 4, 4);
             this.tableMain.Controls.Add(this.label18, 3, 4);
-            this.tableMain.Controls.Add(this.lblstartDate, 2, 4);
             this.tableMain.Controls.Add(this.lblPhone, 1, 6);
             this.tableMain.Controls.Add(this.lblEstiAmount, 1, 5);
             this.tableMain.Controls.Add(this.lblConSite, 1, 2);
@@ -221,7 +223,7 @@
             this.tableMain.Controls.Add(this.label14, 7, 4);
             this.tableMain.Controls.Add(this.lblConOutline, 1, 3);
             this.tableMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableMain.Location = new System.Drawing.Point(0, 65);
+            this.tableMain.Location = new System.Drawing.Point(0, 50);
             this.tableMain.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.tableMain.Name = "tableMain";
             this.tableMain.Padding = new System.Windows.Forms.Padding(5, 5, 20, 5);
@@ -236,17 +238,67 @@
             this.tableMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.27318F));
             this.tableMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.27318F));
             this.tableMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableMain.Size = new System.Drawing.Size(984, 470);
+            this.tableMain.Size = new System.Drawing.Size(984, 485);
             this.tableMain.TabIndex = 5;
+            // 
+            // endPicker
+            // 
+            this.endPicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.endPicker.CustomFormat = "yyyy/MM/dd";
+            this.endPicker.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.endPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.endPicker.Location = new System.Drawing.Point(487, 197);
+            this.endPicker.Name = "endPicker";
+            this.endPicker.Size = new System.Drawing.Size(138, 23);
+            this.endPicker.TabIndex = 37;
+            this.endPicker.ValueChanged += new System.EventHandler(this.endPicker_ValueChanged);
+            // 
+            // startPicker
+            // 
+            this.startPicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.startPicker.CustomFormat = "yyyy/MM/dd";
+            this.startPicker.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.startPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.startPicker.Location = new System.Drawing.Point(296, 197);
+            this.startPicker.Name = "startPicker";
+            this.startPicker.Size = new System.Drawing.Size(138, 23);
+            this.startPicker.TabIndex = 36;
+            this.startPicker.ValueChanged += new System.EventHandler(this.startPicker_ValueChanged);
+            // 
+            // lblReason
+            // 
+            this.lblReason.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.tableMain.SetColumnSpan(this.lblReason, 8);
+            this.lblReason.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblReason.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblReason.Location = new System.Drawing.Point(239, 309);
+            this.lblReason.Name = "lblReason";
+            this.lblReason.ReadOnly = true;
+            this.lblReason.Size = new System.Drawing.Size(722, 80);
+            this.lblReason.TabIndex = 29;
+            this.lblReason.Text = "";
+            // 
+            // lblRemark
+            // 
+            this.lblRemark.BackColor = System.Drawing.SystemColors.Control;
+            this.tableMain.SetColumnSpan(this.lblRemark, 8);
+            this.lblRemark.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblRemark.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblRemark.Location = new System.Drawing.Point(239, 395);
+            this.lblRemark.Name = "lblRemark";
+            this.lblRemark.ReadOnly = true;
+            this.lblRemark.Size = new System.Drawing.Size(722, 82);
+            this.lblRemark.TabIndex = 28;
+            this.lblRemark.Text = "";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label5.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label5.Location = new System.Drawing.Point(8, 180);
+            this.label5.Location = new System.Drawing.Point(8, 189);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(225, 37);
+            this.label5.Size = new System.Drawing.Size(225, 39);
             this.label5.TabIndex = 26;
             this.label5.Text = "Construction Period";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -258,10 +310,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label23.Location = new System.Drawing.Point(241, 185);
+            this.label23.Location = new System.Drawing.Point(241, 194);
             this.label23.Margin = new System.Windows.Forms.Padding(5);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(47, 27);
+            this.label23.Size = new System.Drawing.Size(47, 29);
             this.label23.TabIndex = 23;
             this.label23.Text = "自";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -275,10 +327,10 @@
             this.lblTotalDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.lblTotalDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblTotalDate.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblTotalDate.Location = new System.Drawing.Point(736, 185);
+            this.lblTotalDate.Location = new System.Drawing.Point(736, 194);
             this.lblTotalDate.Margin = new System.Windows.Forms.Padding(5);
             this.lblTotalDate.Name = "lblTotalDate";
-            this.lblTotalDate.Size = new System.Drawing.Size(134, 27);
+            this.lblTotalDate.Size = new System.Drawing.Size(134, 29);
             this.lblTotalDate.TabIndex = 22;
             this.lblTotalDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -289,29 +341,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label21.Location = new System.Drawing.Point(633, 185);
+            this.label21.Location = new System.Drawing.Point(633, 194);
             this.label21.Margin = new System.Windows.Forms.Padding(5);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(93, 27);
+            this.label21.Size = new System.Drawing.Size(93, 29);
             this.label21.TabIndex = 21;
             this.label21.Text = " 施工日数：";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblEndDate
-            // 
-            this.lblEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblEndDate.AutoSize = true;
-            this.lblEndDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.lblEndDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblEndDate.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblEndDate.Location = new System.Drawing.Point(489, 185);
-            this.lblEndDate.Margin = new System.Windows.Forms.Padding(5);
-            this.lblEndDate.Name = "lblEndDate";
-            this.lblEndDate.Size = new System.Drawing.Size(134, 27);
-            this.lblEndDate.TabIndex = 20;
-            this.lblEndDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label18
             // 
@@ -320,29 +356,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label18.Location = new System.Drawing.Point(442, 185);
+            this.label18.Location = new System.Drawing.Point(442, 194);
             this.label18.Margin = new System.Windows.Forms.Padding(5);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(37, 27);
+            this.label18.Size = new System.Drawing.Size(37, 29);
             this.label18.TabIndex = 19;
             this.label18.Text = "至";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblstartDate
-            // 
-            this.lblstartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblstartDate.AutoSize = true;
-            this.lblstartDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.lblstartDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblstartDate.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblstartDate.Location = new System.Drawing.Point(298, 185);
-            this.lblstartDate.Margin = new System.Windows.Forms.Padding(5);
-            this.lblstartDate.Name = "lblstartDate";
-            this.lblstartDate.Size = new System.Drawing.Size(134, 27);
-            this.lblstartDate.TabIndex = 18;
-            this.lblstartDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblPhone
             // 
@@ -353,10 +373,10 @@
             this.lblPhone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tableMain.SetColumnSpan(this.lblPhone, 7);
             this.lblPhone.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblPhone.Location = new System.Drawing.Point(241, 259);
+            this.lblPhone.Location = new System.Drawing.Point(241, 272);
             this.lblPhone.Margin = new System.Windows.Forms.Padding(5);
             this.lblPhone.Name = "lblPhone";
-            this.lblPhone.Size = new System.Drawing.Size(688, 27);
+            this.lblPhone.Size = new System.Drawing.Size(688, 29);
             this.lblPhone.TabIndex = 15;
             this.lblPhone.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -369,10 +389,10 @@
             this.lblEstiAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tableMain.SetColumnSpan(this.lblEstiAmount, 7);
             this.lblEstiAmount.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblEstiAmount.Location = new System.Drawing.Point(241, 222);
+            this.lblEstiAmount.Location = new System.Drawing.Point(241, 233);
             this.lblEstiAmount.Margin = new System.Windows.Forms.Padding(5);
             this.lblEstiAmount.Name = "lblEstiAmount";
-            this.lblEstiAmount.Size = new System.Drawing.Size(688, 27);
+            this.lblEstiAmount.Size = new System.Drawing.Size(688, 29);
             this.lblEstiAmount.TabIndex = 14;
             this.lblEstiAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -386,10 +406,10 @@
             this.lblConSite.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tableMain.SetColumnSpan(this.lblConSite, 8);
             this.lblConSite.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblConSite.Location = new System.Drawing.Point(241, 84);
+            this.lblConSite.Location = new System.Drawing.Point(241, 88);
             this.lblConSite.Margin = new System.Windows.Forms.Padding(5);
             this.lblConSite.Name = "lblConSite";
-            this.lblConSite.Size = new System.Drawing.Size(718, 27);
+            this.lblConSite.Size = new System.Drawing.Size(718, 29);
             this.lblConSite.TabIndex = 11;
             this.lblConSite.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -403,10 +423,10 @@
             this.lblConNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tableMain.SetColumnSpan(this.lblConNo, 8);
             this.lblConNo.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblConNo.Location = new System.Drawing.Point(241, 47);
+            this.lblConNo.Location = new System.Drawing.Point(241, 49);
             this.lblConNo.Margin = new System.Windows.Forms.Padding(5);
             this.lblConNo.Name = "lblConNo";
-            this.lblConNo.Size = new System.Drawing.Size(718, 27);
+            this.lblConNo.Size = new System.Drawing.Size(718, 29);
             this.lblConNo.TabIndex = 10;
             this.lblConNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -423,7 +443,7 @@
             this.lblConName.Location = new System.Drawing.Point(241, 10);
             this.lblConName.Margin = new System.Windows.Forms.Padding(5);
             this.lblConName.Name = "lblConName";
-            this.lblConName.Size = new System.Drawing.Size(718, 27);
+            this.lblConName.Size = new System.Drawing.Size(718, 29);
             this.lblConName.TabIndex = 9;
             this.lblConName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -436,7 +456,7 @@
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label1.Location = new System.Drawing.Point(8, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(225, 37);
+            this.label1.Size = new System.Drawing.Size(225, 39);
             this.label1.TabIndex = 0;
             this.label1.Text = "Construction Name";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -446,9 +466,9 @@
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(8, 42);
+            this.label2.Location = new System.Drawing.Point(8, 44);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(225, 37);
+            this.label2.Size = new System.Drawing.Size(225, 39);
             this.label2.TabIndex = 1;
             this.label2.Text = "Construction No.";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -458,9 +478,9 @@
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label3.Location = new System.Drawing.Point(8, 79);
+            this.label3.Location = new System.Drawing.Point(8, 83);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(225, 37);
+            this.label3.Size = new System.Drawing.Size(225, 39);
             this.label3.TabIndex = 2;
             this.label3.Text = "Construction Site";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -470,9 +490,9 @@
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label4.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label4.Location = new System.Drawing.Point(8, 116);
+            this.label4.Location = new System.Drawing.Point(8, 122);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(225, 64);
+            this.label4.Size = new System.Drawing.Size(225, 67);
             this.label4.TabIndex = 3;
             this.label4.Text = "Construction Outline";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -482,9 +502,9 @@
             this.label6.AutoSize = true;
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label6.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label6.Location = new System.Drawing.Point(8, 217);
+            this.label6.Location = new System.Drawing.Point(8, 228);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(225, 37);
+            this.label6.Size = new System.Drawing.Size(225, 39);
             this.label6.TabIndex = 5;
             this.label6.Text = "Estimate Amount";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -494,9 +514,9 @@
             this.label7.AutoSize = true;
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label7.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label7.Location = new System.Drawing.Point(8, 254);
+            this.label7.Location = new System.Drawing.Point(8, 267);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(225, 37);
+            this.label7.Size = new System.Drawing.Size(225, 39);
             this.label7.TabIndex = 6;
             this.label7.Text = "Phone";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -506,9 +526,9 @@
             this.label8.AutoSize = true;
             this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label8.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label8.Location = new System.Drawing.Point(8, 291);
+            this.label8.Location = new System.Drawing.Point(8, 306);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(225, 84);
+            this.label8.Size = new System.Drawing.Size(225, 86);
             this.label8.TabIndex = 7;
             this.label8.Text = "Reson for Construction";
             this.label8.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -518,9 +538,9 @@
             this.label9.AutoSize = true;
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label9.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label9.Location = new System.Drawing.Point(8, 375);
+            this.label9.Location = new System.Drawing.Point(8, 392);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(225, 90);
+            this.label9.Size = new System.Drawing.Size(225, 88);
             this.label9.TabIndex = 8;
             this.label9.Text = "Remarks";
             this.label9.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -532,10 +552,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label14.Location = new System.Drawing.Point(880, 185);
+            this.label14.Location = new System.Drawing.Point(880, 194);
             this.label14.Margin = new System.Windows.Forms.Padding(5);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(49, 27);
+            this.label14.Size = new System.Drawing.Size(49, 29);
             this.label14.TabIndex = 13;
             this.label14.Text = " Days";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -546,42 +566,16 @@
             this.tableMain.SetColumnSpan(this.lblConOutline, 8);
             this.lblConOutline.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblConOutline.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblConOutline.Location = new System.Drawing.Point(239, 119);
+            this.lblConOutline.Location = new System.Drawing.Point(239, 125);
             this.lblConOutline.Name = "lblConOutline";
             this.lblConOutline.ReadOnly = true;
-            this.lblConOutline.Size = new System.Drawing.Size(722, 58);
+            this.lblConOutline.Size = new System.Drawing.Size(722, 61);
             this.lblConOutline.TabIndex = 25;
             this.lblConOutline.Text = "";
             // 
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.tableMain.SetColumnSpan(this.richTextBox1, 8);
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.richTextBox1.Location = new System.Drawing.Point(239, 378);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(722, 84);
-            this.richTextBox1.TabIndex = 28;
-            this.richTextBox1.Text = "";
-            // 
-            // lblReason
-            // 
-            this.lblReason.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.tableMain.SetColumnSpan(this.lblReason, 8);
-            this.lblReason.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblReason.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblReason.Location = new System.Drawing.Point(239, 294);
-            this.lblReason.Name = "lblReason";
-            this.lblReason.ReadOnly = true;
-            this.lblReason.Size = new System.Drawing.Size(722, 78);
-            this.lblReason.TabIndex = 29;
-            this.lblReason.Text = "";
             // 
             // DisplayForm
             // 
@@ -619,9 +613,7 @@
         private System.Windows.Forms.TableLayoutPanel tableMain;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label lblTotalDate;
-        private System.Windows.Forms.Label lblEndDate;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label lblstartDate;
         private System.Windows.Forms.Label lblPhone;
         private System.Windows.Forms.Label lblEstiAmount;
         private System.Windows.Forms.Label lblConSite;
@@ -643,6 +635,9 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.RichTextBox lblReason;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox lblRemark;
+        private System.Windows.Forms.DateTimePicker startPicker;
+        private System.Windows.Forms.DateTimePicker endPicker;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
