@@ -61,12 +61,16 @@ namespace MyConstruction
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (!(txtUserName.Text.Equals("User")) && !(txtPassword.Text.Equals("Pass")))
+            if ((txtUserName.Text.Equals("User")) && (txtPassword.Text.Equals("User")))
             {
                 this.Hide();
                 MainForm mainform = new MainForm();
                 mainform.Show();
                 
+            }
+            else if (txtUserName.Text.Equals(string.Empty) || txtPassword.Text.Equals(string.Empty))
+             {
+                 MessageBox.Show("Please Type UserName and Password!");
             }
             else
             {

@@ -30,12 +30,11 @@
         {
             this.lblPath = new System.Windows.Forms.Label();
             this.panelbottom = new System.Windows.Forms.Panel();
-            this.pbar = new System.Windows.Forms.ProgressBar();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblTitle = new System.Windows.Forms.Label();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnReset = new System.Windows.Forms.Button();
             this.btnOpen = new System.Windows.Forms.Button();
             this.btnDownload = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -64,8 +63,10 @@
             this.endPicker = new System.Windows.Forms.DateTimePicker();
             this.lblPhone = new System.Windows.Forms.TextBox();
             this.startPicker = new System.Windows.Forms.DateTimePicker();
-            this.btnReset = new System.Windows.Forms.Button();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.pbar = new System.Windows.Forms.ProgressBar();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.lblTitle = new System.Windows.Forms.TextBox();
             this.panelbottom.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -89,6 +90,7 @@
             // panelbottom
             // 
             this.panelbottom.BackColor = System.Drawing.Color.DarkKhaki;
+            this.panelbottom.Controls.Add(this.btnCancel);
             this.panelbottom.Controls.Add(this.pbar);
             this.panelbottom.Controls.Add(this.lblPath);
             this.panelbottom.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -96,14 +98,6 @@
             this.panelbottom.Name = "panelbottom";
             this.panelbottom.Size = new System.Drawing.Size(984, 27);
             this.panelbottom.TabIndex = 1;
-            // 
-            // pbar
-            // 
-            this.pbar.Location = new System.Drawing.Point(885, 7);
-            this.pbar.Margin = new System.Windows.Forms.Padding(10);
-            this.pbar.Name = "pbar";
-            this.pbar.Size = new System.Drawing.Size(89, 13);
-            this.pbar.TabIndex = 1;
             // 
             // panel1
             // 
@@ -130,19 +124,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(984, 65);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTitle.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblTitle.Location = new System.Drawing.Point(0, 0);
-            this.lblTitle.Margin = new System.Windows.Forms.Padding(0);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(984, 65);
-            this.lblTitle.TabIndex = 1;
-            this.lblTitle.Text = "Construction ";
-            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // backgroundWorker
             // 
             this.backgroundWorker.WorkerReportsProgress = true;
@@ -163,6 +144,19 @@
             this.panel2.Size = new System.Drawing.Size(984, 29);
             this.panel2.TabIndex = 3;
             // 
+            // btnReset
+            // 
+            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReset.Location = new System.Drawing.Point(335, 1);
+            this.btnReset.Margin = new System.Windows.Forms.Padding(0);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
+            this.btnReset.Size = new System.Drawing.Size(75, 25);
+            this.btnReset.TabIndex = 11;
+            this.btnReset.Text = "リセット";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
             // btnOpen
             // 
             this.btnOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -171,8 +165,8 @@
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.btnOpen.Size = new System.Drawing.Size(75, 25);
-            this.btnOpen.TabIndex = 1;
-            this.btnOpen.Text = "Open PDF";
+            this.btnOpen.TabIndex = 10;
+            this.btnOpen.Text = "PDFを開く";
             this.btnOpen.UseVisualStyleBackColor = true;
             this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
@@ -183,8 +177,8 @@
             this.btnDownload.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
             this.btnDownload.Name = "btnDownload";
             this.btnDownload.Size = new System.Drawing.Size(75, 25);
-            this.btnDownload.TabIndex = 0;
-            this.btnDownload.Text = "Download";
+            this.btnDownload.TabIndex = 12;
+            this.btnDownload.Text = "ダウンロード";
             this.btnDownload.UseVisualStyleBackColor = true;
             this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
             // 
@@ -201,7 +195,7 @@
             this.lblConName.Location = new System.Drawing.Point(239, 12);
             this.lblConName.Name = "lblConName";
             this.lblConName.Size = new System.Drawing.Size(722, 23);
-            this.lblConName.TabIndex = 30;
+            this.lblConName.TabIndex = 0;
             this.lblConName.TextChanged += new System.EventHandler(this.lblConName_TextChanged);
             // 
             // lblConOutline
@@ -213,7 +207,7 @@
             this.lblConOutline.Location = new System.Drawing.Point(239, 119);
             this.lblConOutline.Name = "lblConOutline";
             this.lblConOutline.Size = new System.Drawing.Size(722, 58);
-            this.lblConOutline.TabIndex = 25;
+            this.lblConOutline.TabIndex = 3;
             this.lblConOutline.Text = "";
             this.lblConOutline.TextChanged += new System.EventHandler(this.lblConOutline_TextChanged);
             // 
@@ -405,14 +399,14 @@
             // 
             // lblRemark
             // 
-            this.lblRemark.BackColor = System.Drawing.SystemColors.Control;
+            this.lblRemark.BackColor = System.Drawing.Color.White;
             this.tableMain.SetColumnSpan(this.lblRemark, 8);
             this.lblRemark.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblRemark.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblRemark.Location = new System.Drawing.Point(239, 378);
             this.lblRemark.Name = "lblRemark";
             this.lblRemark.Size = new System.Drawing.Size(722, 84);
-            this.lblRemark.TabIndex = 28;
+            this.lblRemark.TabIndex = 9;
             this.lblRemark.Text = "";
             this.lblRemark.TextChanged += new System.EventHandler(this.lblRemark_TextChanged);
             // 
@@ -425,7 +419,7 @@
             this.lblReason.Location = new System.Drawing.Point(239, 294);
             this.lblReason.Name = "lblReason";
             this.lblReason.Size = new System.Drawing.Size(722, 78);
-            this.lblReason.TabIndex = 29;
+            this.lblReason.TabIndex = 8;
             this.lblReason.Text = "";
             this.lblReason.TextChanged += new System.EventHandler(this.lblReason_TextChanged);
             // 
@@ -438,7 +432,7 @@
             this.lblConNo.Location = new System.Drawing.Point(239, 49);
             this.lblConNo.Name = "lblConNo";
             this.lblConNo.Size = new System.Drawing.Size(722, 23);
-            this.lblConNo.TabIndex = 31;
+            this.lblConNo.TabIndex = 1;
             this.lblConNo.TextChanged += new System.EventHandler(this.lblConNo_TextChanged);
             // 
             // lblConSite
@@ -450,7 +444,7 @@
             this.lblConSite.Location = new System.Drawing.Point(239, 86);
             this.lblConSite.Name = "lblConSite";
             this.lblConSite.Size = new System.Drawing.Size(722, 23);
-            this.lblConSite.TabIndex = 32;
+            this.lblConSite.TabIndex = 2;
             this.lblConSite.TextChanged += new System.EventHandler(this.lblConSite_TextChanged);
             // 
             // lblEstiAmount
@@ -461,7 +455,7 @@
             this.lblEstiAmount.Location = new System.Drawing.Point(239, 224);
             this.lblEstiAmount.Name = "lblEstiAmount";
             this.lblEstiAmount.Size = new System.Drawing.Size(722, 23);
-            this.lblEstiAmount.TabIndex = 33;
+            this.lblEstiAmount.TabIndex = 6;
             this.lblEstiAmount.TextChanged += new System.EventHandler(this.lblEstiAmount_TextChanged);
             // 
             // tableMain
@@ -528,7 +522,7 @@
             this.endPicker.Location = new System.Drawing.Point(487, 187);
             this.endPicker.Name = "endPicker";
             this.endPicker.Size = new System.Drawing.Size(138, 23);
-            this.endPicker.TabIndex = 36;
+            this.endPicker.TabIndex = 5;
             this.endPicker.ValueChanged += new System.EventHandler(this.endPicker_ValueChanged);
             // 
             // lblPhone
@@ -539,7 +533,7 @@
             this.lblPhone.Location = new System.Drawing.Point(239, 261);
             this.lblPhone.Name = "lblPhone";
             this.lblPhone.Size = new System.Drawing.Size(722, 23);
-            this.lblPhone.TabIndex = 34;
+            this.lblPhone.TabIndex = 7;
             this.lblPhone.TextChanged += new System.EventHandler(this.lblPhone_TextChanged);
             // 
             // startPicker
@@ -551,21 +545,39 @@
             this.startPicker.Location = new System.Drawing.Point(296, 187);
             this.startPicker.Name = "startPicker";
             this.startPicker.Size = new System.Drawing.Size(138, 23);
-            this.startPicker.TabIndex = 35;
+            this.startPicker.TabIndex = 4;
             this.startPicker.ValueChanged += new System.EventHandler(this.startPicker_ValueChanged);
             // 
-            // btnReset
+            // pbar
             // 
-            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReset.Location = new System.Drawing.Point(335, 1);
-            this.btnReset.Margin = new System.Windows.Forms.Padding(0);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
-            this.btnReset.Size = new System.Drawing.Size(75, 25);
-            this.btnReset.TabIndex = 2;
-            this.btnReset.Text = "Reset";
-            this.btnReset.UseVisualStyleBackColor = true;
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            this.pbar.Location = new System.Drawing.Point(872, 7);
+            this.pbar.Margin = new System.Windows.Forms.Padding(10);
+            this.pbar.Name = "pbar";
+            this.pbar.Size = new System.Drawing.Size(89, 13);
+            this.pbar.TabIndex = 1;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.FlatAppearance.BorderSize = 0;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Location = new System.Drawing.Point(963, 2);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(18, 23);
+            this.btnCancel.TabIndex = 4;
+            this.btnCancel.Text = "✖";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Visible = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTitle.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblTitle.Location = new System.Drawing.Point(3, 13);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(978, 39);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // EditForm
             // 
@@ -596,9 +608,7 @@
         private System.Windows.Forms.Panel panelbottom;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label lblTitle;
         private System.ComponentModel.BackgroundWorker backgroundWorker;
-        private System.Windows.Forms.ProgressBar pbar;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnDownload;
         private System.Windows.Forms.Button btnOpen;
@@ -630,5 +640,8 @@
         private System.Windows.Forms.DateTimePicker startPicker;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.ProgressBar pbar;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.TextBox lblTitle;
     }
 }

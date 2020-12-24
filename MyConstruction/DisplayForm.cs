@@ -27,6 +27,7 @@ namespace MyConstruction
             {
                 if (!backgroundWorker.IsBusy)
                 {
+                    btnCancel.Visible = true;
                     backgroundWorker.RunWorkerAsync();
                 }
             }
@@ -42,7 +43,7 @@ namespace MyConstruction
         {
             try
             {
-                  method.runExtractor(backgroundWorker, lblPath.Text);
+                method.runExtractor(backgroundWorker, lblPath.Text);
             }
             catch (Exception ex)
             {
@@ -55,6 +56,7 @@ namespace MyConstruction
         {
             method.putData();
             setData();
+            btnCancel.Visible = false;
             //MessageBox.Show("Complete", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -100,24 +102,17 @@ namespace MyConstruction
             }
         }
 
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (!backgroundWorker.IsBusy)
-            {
-                backgroundWorker.RunWorkerAsync();
-            }
-        }
-
         private void btnOpen_Click(object sender, EventArgs e)
         {
             OpenFileDialog of = new OpenFileDialog();
             of.Filter = "PDF files(*.pdf)|*.pdf";
             if (of.ShowDialog() == DialogResult.OK)
             {
-                lblPath.Text = of.FileName.ToString();
+                MainForm.path = lblPath.Text = of.FileName.ToString();
+              
                 if (!backgroundWorker.IsBusy)
                 {
+                    btnCancel.Visible = true;
                     backgroundWorker.RunWorkerAsync();
                 }
             }
@@ -157,6 +152,16 @@ namespace MyConstruction
         private void endPicker_ValueChanged(object sender, EventArgs e)
         {
             lblTotalDate.Text = Math.Round((endPicker.Value - startPicker.Value).TotalDays + 1).ToString();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            if (backgroundWorker.IsBusy)
+            {
+                pbar.Value = 100;
+                btnCancel.Visible = false;
+                backgroundWorker.CancelAsync();
+            }
         }
 
     }

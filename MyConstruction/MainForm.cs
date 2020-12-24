@@ -15,6 +15,7 @@ namespace MyConstruction
     {
         private Button currentButton;
         private Form activeForm;
+       
         public static string finaltext = "";
         public static Boolean editdatachanged = false;
         public static Boolean firsttime = true;
@@ -176,6 +177,22 @@ namespace MyConstruction
             MainForm.lib = 1;
         }
 
-
+        private void btnApply_Click(object sender, EventArgs e)
+        {
+            if (activeForm != null)
+            {
+                MainForm.finaltext = "";
+                editdatachanged = false;
+                firsttime = true;
+                if (currentButton == btnDisplay)
+                {
+                    OpenChildForm(new DisplayForm(), btnDisplay);
+                }
+                else if (currentButton == btnEdit)
+                {
+                    OpenChildForm(new EditForm(), btnEdit);
+                }
+            }
+        }
     }
 }

@@ -30,6 +30,7 @@
         {
             this.lblPath = new System.Windows.Forms.Label();
             this.panelbottom = new System.Windows.Forms.Panel();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.pbar = new System.Windows.Forms.ProgressBar();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -88,6 +89,7 @@
             // panelbottom
             // 
             this.panelbottom.BackColor = System.Drawing.Color.DarkKhaki;
+            this.panelbottom.Controls.Add(this.btnCancel);
             this.panelbottom.Controls.Add(this.pbar);
             this.panelbottom.Controls.Add(this.lblPath);
             this.panelbottom.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -96,9 +98,22 @@
             this.panelbottom.Size = new System.Drawing.Size(984, 27);
             this.panelbottom.TabIndex = 1;
             // 
+            // btnCancel
+            // 
+            this.btnCancel.FlatAppearance.BorderSize = 0;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Location = new System.Drawing.Point(963, 2);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(18, 23);
+            this.btnCancel.TabIndex = 2;
+            this.btnCancel.Text = "✖";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Visible = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // pbar
             // 
-            this.pbar.Location = new System.Drawing.Point(885, 7);
+            this.pbar.Location = new System.Drawing.Point(872, 7);
             this.pbar.Margin = new System.Windows.Forms.Padding(10);
             this.pbar.Name = "pbar";
             this.pbar.Size = new System.Drawing.Size(89, 13);
@@ -170,7 +185,7 @@
             this.btnOpen.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.btnOpen.Size = new System.Drawing.Size(75, 25);
             this.btnOpen.TabIndex = 1;
-            this.btnOpen.Text = "Open PDF";
+            this.btnOpen.Text = "PDFを開く";
             this.btnOpen.UseVisualStyleBackColor = true;
             this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
@@ -182,7 +197,7 @@
             this.btnDownload.Name = "btnDownload";
             this.btnDownload.Size = new System.Drawing.Size(75, 25);
             this.btnDownload.TabIndex = 0;
-            this.btnDownload.Text = "Download";
+            this.btnDownload.Text = "ダウンロード";
             this.btnDownload.UseVisualStyleBackColor = true;
             this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
             // 
@@ -639,5 +654,6 @@
         private System.Windows.Forms.DateTimePicker startPicker;
         private System.Windows.Forms.DateTimePicker endPicker;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

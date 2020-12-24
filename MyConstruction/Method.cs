@@ -93,9 +93,9 @@ namespace MyConstruction
                     {
                         for (int j = i + 1; j < line.Count; j++)
                         {
-                            data = data + "\n" + line[j];
+                            data = data + line[j] + "\n";
                         }
-                        return data;
+                        return data.Trim();
                     }
                 }
                 return "";
@@ -138,11 +138,11 @@ namespace MyConstruction
                     {
                         if (i == line.Count)
                         {
-                            return block;
+                            return block.Trim();
                         }
                         else if (line[i].Contains(ekey) && !ekey.Equals(string.Empty))
                         {
-                            return block;
+                            return block.Trim();
                         }
                         else
                         {
@@ -199,7 +199,7 @@ namespace MyConstruction
             }
             catch (Exception)
             {
-                MessageBox.Show("PDF is Worng!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("PDF is Worng!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }    
          
         }
@@ -224,6 +224,7 @@ namespace MyConstruction
 
                     Font title = new Font(bf, 15, Font.BOLD);
                     Font normal = new Font(bf, 12, Font.NORMAL);
+
                     float[] columnWidth = { 150,30,70,30,70,75,50,30 };
 
                     doc.Open();

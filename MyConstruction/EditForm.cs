@@ -28,6 +28,7 @@ namespace MyConstruction
             {
                 if (!backgroundWorker.IsBusy)
                 {
+                    btnCancel.Visible = true;
                     backgroundWorker.RunWorkerAsync();
                 }
             }
@@ -55,6 +56,7 @@ namespace MyConstruction
         {
             method.putData();
             setData();
+            btnCancel.Visible = true;
             //MessageBox.Show("Complete", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -101,13 +103,6 @@ namespace MyConstruction
             pbar.Update();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (!backgroundWorker.IsBusy)
-            {
-                backgroundWorker.RunWorkerAsync();
-            }
-        }
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
@@ -115,9 +110,10 @@ namespace MyConstruction
             of.Filter = "PDF files(*.pdf)|*.pdf";
             if (of.ShowDialog() == DialogResult.OK)
             {
-                lblPath.Text = of.FileName.ToString();
+                MainForm.path = lblPath.Text = of.FileName.ToString();
                 if (!backgroundWorker.IsBusy)
                 {
+                    btnCancel.Visible = true;
                     backgroundWorker.RunWorkerAsync();
                 }
             }
@@ -217,6 +213,16 @@ namespace MyConstruction
         {
             if (!firsttime)
                 MainForm.editdatachanged = true;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            if (backgroundWorker.IsBusy)
+            {
+                pbar.Value = 100;
+                btnCancel.Visible = false;
+                backgroundWorker.CancelAsync();
+            }
         }
 
     }
