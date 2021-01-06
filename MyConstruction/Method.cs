@@ -138,18 +138,18 @@ namespace MyConstruction
                     {
                         if (i == line.Count)
                         {
-                            return block.Trim();
+                            return block;
                         }
                         else if (line[i].Contains(ekey) && !ekey.Equals(string.Empty))
                         {
-                            return block.Trim();
+                            return block;
                         }
                         else
                         {
                             block = block +"\n"+ line[i];
                         }
                     }
-                    if (line[i].Contains(skey))
+                    else if (line[i].Contains(skey))
                     {
                         block = line[i].Substring(skey.Length + 1);
                         found = true;

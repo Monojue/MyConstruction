@@ -30,6 +30,8 @@
         {
             this.lblPath = new System.Windows.Forms.Label();
             this.panelbottom = new System.Windows.Forms.Panel();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.pbar = new System.Windows.Forms.ProgressBar();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
@@ -64,9 +66,7 @@
             this.lblPhone = new System.Windows.Forms.TextBox();
             this.startPicker = new System.Windows.Forms.DateTimePicker();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.pbar = new System.Windows.Forms.ProgressBar();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.lblTitle = new System.Windows.Forms.TextBox();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.panelbottom.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -98,6 +98,27 @@
             this.panelbottom.Name = "panelbottom";
             this.panelbottom.Size = new System.Drawing.Size(984, 27);
             this.panelbottom.TabIndex = 1;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.FlatAppearance.BorderSize = 0;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Location = new System.Drawing.Point(963, 2);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(18, 23);
+            this.btnCancel.TabIndex = 4;
+            this.btnCancel.Text = "✖";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Visible = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // pbar
+            // 
+            this.pbar.Location = new System.Drawing.Point(872, 7);
+            this.pbar.Margin = new System.Windows.Forms.Padding(10);
+            this.pbar.Name = "pbar";
+            this.pbar.Size = new System.Drawing.Size(89, 13);
+            this.pbar.TabIndex = 1;
             // 
             // panel1
             // 
@@ -548,36 +569,16 @@
             this.startPicker.TabIndex = 4;
             this.startPicker.ValueChanged += new System.EventHandler(this.startPicker_ValueChanged);
             // 
-            // pbar
-            // 
-            this.pbar.Location = new System.Drawing.Point(872, 7);
-            this.pbar.Margin = new System.Windows.Forms.Padding(10);
-            this.pbar.Name = "pbar";
-            this.pbar.Size = new System.Drawing.Size(89, 13);
-            this.pbar.TabIndex = 1;
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.FlatAppearance.BorderSize = 0;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Location = new System.Drawing.Point(963, 2);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(18, 23);
-            this.btnCancel.TabIndex = 4;
-            this.btnCancel.Text = "✖";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Visible = false;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
             // lblTitle
             // 
-            this.lblTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTitle.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblTitle.Location = new System.Drawing.Point(3, 13);
+            this.lblTitle.Location = new System.Drawing.Point(3, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(978, 39);
+            this.lblTitle.Size = new System.Drawing.Size(978, 65);
             this.lblTitle.TabIndex = 0;
-            this.lblTitle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // EditForm
             // 
@@ -642,6 +643,6 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.ProgressBar pbar;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.TextBox lblTitle;
+        private System.Windows.Forms.Label lblTitle;
     }
 }
