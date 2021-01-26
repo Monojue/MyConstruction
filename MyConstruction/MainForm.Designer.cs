@@ -45,6 +45,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.rdo3 = new System.Windows.Forms.RadioButton();
+            this.rdo4 = new System.Windows.Forms.RadioButton();
+            this.rdoexp = new System.Windows.Forms.RadioButton();
             this.panelMenu.SuspendLayout();
             this.box.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -67,6 +70,9 @@
             // 
             // box
             // 
+            this.box.Controls.Add(this.rdoexp);
+            this.box.Controls.Add(this.rdo4);
+            this.box.Controls.Add(this.rdo3);
             this.box.Controls.Add(this.btnApply);
             this.box.Controls.Add(this.rdo2);
             this.box.Controls.Add(this.rdo1);
@@ -78,7 +84,7 @@
             this.box.Margin = new System.Windows.Forms.Padding(10);
             this.box.Name = "box";
             this.box.Padding = new System.Windows.Forms.Padding(10);
-            this.box.Size = new System.Drawing.Size(200, 135);
+            this.box.Size = new System.Drawing.Size(200, 222);
             this.box.TabIndex = 4;
             this.box.TabStop = false;
             this.box.Text = "PDF 設定";
@@ -89,7 +95,7 @@
             this.btnApply.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
             this.btnApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnApply.Font = new System.Drawing.Font("Yu Mincho", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnApply.Location = new System.Drawing.Point(107, 93);
+            this.btnApply.Location = new System.Drawing.Point(107, 183);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(80, 25);
             this.btnApply.TabIndex = 7;
@@ -204,7 +210,7 @@
             this.btnMin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMin.FlatAppearance.BorderSize = 0;
             this.btnMin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMin.Font = new System.Drawing.Font("Nachlieli CLM", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.btnMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.btnMin.ForeColor = System.Drawing.SystemColors.Control;
             this.btnMin.Location = new System.Drawing.Point(930, 12);
             this.btnMin.Name = "btnMin";
@@ -219,7 +225,7 @@
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Font = new System.Drawing.Font("Nachlieli CLM", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.btnClose.ForeColor = System.Drawing.SystemColors.Control;
             this.btnClose.Location = new System.Drawing.Point(962, 12);
             this.btnClose.Name = "btnClose";
@@ -269,6 +275,51 @@
             // 
             this.openFileDialog.FileName = "openFileDialog";
             // 
+            // rdo3
+            // 
+            this.rdo3.AutoSize = true;
+            this.rdo3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.rdo3.Location = new System.Drawing.Point(10, 85);
+            this.rdo3.Margin = new System.Windows.Forms.Padding(5);
+            this.rdo3.Name = "rdo3";
+            this.rdo3.Padding = new System.Windows.Forms.Padding(5);
+            this.rdo3.Size = new System.Drawing.Size(180, 30);
+            this.rdo3.TabIndex = 8;
+            this.rdo3.TabStop = true;
+            this.rdo3.Text = "Method 3";
+            this.rdo3.UseVisualStyleBackColor = true;
+            this.rdo3.CheckedChanged += new System.EventHandler(this.rdo3_CheckedChanged);
+            // 
+            // rdo4
+            // 
+            this.rdo4.AutoSize = true;
+            this.rdo4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.rdo4.Location = new System.Drawing.Point(10, 115);
+            this.rdo4.Margin = new System.Windows.Forms.Padding(5);
+            this.rdo4.Name = "rdo4";
+            this.rdo4.Padding = new System.Windows.Forms.Padding(5);
+            this.rdo4.Size = new System.Drawing.Size(180, 30);
+            this.rdo4.TabIndex = 9;
+            this.rdo4.TabStop = true;
+            this.rdo4.Text = "Method 4";
+            this.rdo4.UseVisualStyleBackColor = true;
+            this.rdo4.CheckedChanged += new System.EventHandler(this.rdo4_CheckedChanged);
+            // 
+            // rdoexp
+            // 
+            this.rdoexp.AutoSize = true;
+            this.rdoexp.Dock = System.Windows.Forms.DockStyle.Top;
+            this.rdoexp.Location = new System.Drawing.Point(10, 145);
+            this.rdoexp.Margin = new System.Windows.Forms.Padding(5);
+            this.rdoexp.Name = "rdoexp";
+            this.rdoexp.Padding = new System.Windows.Forms.Padding(5);
+            this.rdoexp.Size = new System.Drawing.Size(180, 30);
+            this.rdoexp.TabIndex = 10;
+            this.rdoexp.TabStop = true;
+            this.rdoexp.Text = "Export PDF";
+            this.rdoexp.UseVisualStyleBackColor = true;
+            this.rdoexp.CheckedChanged += new System.EventHandler(this.rdoexp_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -312,5 +363,8 @@
         private System.Windows.Forms.RadioButton rdo2;
         private System.Windows.Forms.RadioButton rdo1;
         private System.Windows.Forms.Button btnApply;
+        private System.Windows.Forms.RadioButton rdoexp;
+        private System.Windows.Forms.RadioButton rdo4;
+        private System.Windows.Forms.RadioButton rdo3;
     }
 }

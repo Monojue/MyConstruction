@@ -22,6 +22,7 @@ namespace MyConstruction
 
         public static List<string> line;
         public static List<string> word;
+        public static string mpath;
 
         public void runExtractor(BackgroundWorker background, string path)
         {
@@ -41,6 +42,7 @@ namespace MyConstruction
         {
             using (PdfReader reader = new PdfReader(path))
             {
+                mpath = path;
                 StringBuilder builder = new StringBuilder();
                 for (int i = 1; i <= reader.NumberOfPages; i++)
                 {
@@ -86,6 +88,25 @@ namespace MyConstruction
         {
             try
             {
+                for (int i = 0; i < line.Count; i++)
+                {
+                    if (line[i].Contains(key))
+                    {
+                        return line[i + 1];
+                    }
+                }
+                return "";
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+        }
+
+        public static string getdatadownblock(string key)
+        {
+            try
+            {
                 string data = "";
                 for (int i = 0; i < line.Count; i++)
                 {
@@ -106,7 +127,6 @@ namespace MyConstruction
             }
         }
 
-
         public string getdataline(string key)
         {
             try
@@ -116,6 +136,36 @@ namespace MyConstruction
                     if (line[i].Contains(key))
                     {
                         return line[i].Substring(key.Length + 1);
+                    }
+                }
+                return "";
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+        }
+
+
+        public string getdatakeyinMiddle(string key, int up, int down)
+        {
+            try
+            {
+                string block = "";
+                for (int i = 0; i <= line.Count; i++)
+                {
+                    if (line[i].Contains(key))
+                    {
+                       
+                        for(int j = i-up; j<= i+down; j++)
+                        {
+                            if (!line[j].Contains(key))
+                            {
+                                block = block + "\n" + line[j];
+                            }
+                        }
+
+                        return block.Trim();
                     }
                 }
                 return "";
@@ -163,48 +213,138 @@ namespace MyConstruction
             }
         }
 
+       
+
         public void putData()
         {
 
             try
             {
-                if (MainForm.lib == 0)
+                if (MainForm.lib == 1)
                 {
+                    word = new List<string>();
+                    word.Add(line[4]);      // title
+                    word.Add(getdataline("Construction Name"));      // name
+                    word.Add(getdataline("Construction No"));      // no
+                    word.Add(getdataline("Construction Site"));      // site
+                    word.Add(getdatablock("Construction outline", "Reason for construction"));      // outline
+                    word.Add(getdataline("Estimate Amount"));      // amount
+                    word.Add(getdataline("Phone"));      // phone
+                    word.Add(getdataline("Reason for construction"));      // reson
+                    word.Add(getdatablock("Remarks", string.Empty)); // remarks
+                }
+                else if (MainForm.lib == 2)
+                { 
                     word = new List<string>();
                     word.Add(line[0]);      // title
                     word.Add(getdataup("Construction Name"));      // name
                     word.Add(getdataup("Construction No").Substring(0, Method.getdataup("Construction No").IndexOf(" ")));      // no
                     word.Add(getdataup("Construction Site"));      // site
-                    word.Add(getdatadown("Outline of Construction"));      // outline
+                    word.Add(getdatadownblock("Outline of Construction"));      // outline
                     word.Add(getdataup("Estimate Amount"));      // amount
                     word.Add(getdataup("Phone"));      // phone
                     word.Add(getdataup("Reason for construction"));      // reson
                     word.Add(getdataup("Remarks")); // remarks
                 }
-                else if (MainForm.lib == 1)
+                else if (MainForm.lib == 3)
                 {
                     word = new List<string>();
-                    word.Add(line[0]);      // title
-                    word.Add(getdataline("Construction Name"));      // name
-                    word.Add(getdataline("Construction No"));      // no
-                    word.Add(getdataline("Construction Site"));      // site
+                    word.Add(line[0].Substring(line[0].IndexOf("度")+1).Trim());
+                    word.Add(getdataline("Construction No"));
+                    word.Add(getdataline("Construction Name"));
+                    word.Add(getdataline("Phone"));
 
-                    word.Add(getdatablock("Outline of Construction", "Construction period"));      // outline
+                    word.Add(getdataline("River Name"));
 
-                    word.Add(getdataline("Estimate Amount"));      // amount
-                    word.Add(getdataline("Phone"));      // phone
-                    word.Add(getdatablock("Reason for construction", "Remarks"));      // reson
-                    word.Add(getdatablock("Remarks", string.Empty)); // remarks
+                    word.Add(getdatablock("Position", "Contract enforcement"));
+                    word.Add(getdatadown("Contract enforcement")); 
+                    word.Add(getdatakeyinMiddle("Construction outline", 2, 1));
+                    word.Add(line[line.Count-1]); 
+                }
+                else if (MainForm.lib == 4)
+                {
+                    word = new List<string>();
+                    word.Add(line[1]);     
+                    word.Add(getdataline("Construction name"));      
+                    word.Add(getdataline("Business name"));     
+                    word.Add(getdataline("Constructor name"));      
+
+                    word.Add(getdataline("Phone"));      
+
+                    word.Add(getdataline("Designer name"));      
+                    word.Add(getdataline("Factory Place"));      
+                    word.Add(getdataline("construction number"));
+                    word.Add(getdataline("Unit price Appropriate land"));
+                    word.Add(getdataline("Construction  year"));
+                    word.Add(line[line.Count - 1]);
+                }
+                else if (MainForm.lib == 5)
+                {
+                    
+                    PdfReader reader = new PdfReader(mpath);
+                    string key = reader.Info["Keywords"];
+                    word = new List<string>();
+                    switch (key)
+                    {
+                        case "12":
+                            word.Add(line[0]);      // title
+                            word.Add(getdataline("Construction Name"));      // name
+                            word.Add(getdataline("Construction No"));      // no
+                            word.Add(getdataline("Construction Site"));      // site
+                            word.Add(getdatablock("Outline of Construction", "Construction period"));      // outline
+                            word.Add(getdataline("Estimate Amount"));      // amount
+                            word.Add(getdataline("Phone"));      // phone
+                            word.Add(getdataline("Reason for construction"));      // reson
+                            word.Add(getdatablock("Remarks", string.Empty)); // remarks
+                            break;
+
+
+                        case "3":
+                            word.Add(line[0]);
+                            word.Add(getdataline("Construction No"));
+                            word.Add(getdataline("Construction Name"));
+                            word.Add(getdataline("Phone"));
+
+                            word.Add(getdataline("River Name"));
+
+                            word.Add(getdataline("Position"));
+                            word.Add(getdataline("Contract enforcement"));
+                            word.Add(getdatablock("Construction outline", line[line.Count-1]));
+                            word.Add(line[line.Count - 1]);
+                            break;
+
+
+                        case "4":
+                            word.Add(line[0]);
+                            word.Add(getdatablock("Construction Name", "Business Name"));
+                            word.Add(getdataline("Business Name"));
+                            word.Add(getdataline("Constructor Name"));
+
+                            word.Add(getdataline("Phone"));
+
+                            word.Add(getdataline("Designer Name"));
+                            word.Add(getdataline("Factory Place"));
+                            word.Add(getdataline("Construction Number"));
+                            word.Add(getdataline("Unit Price Appropriate land"));
+                            word.Add(getdataline("Construction year"));
+                            word.Add(line[line.Count - 1]);
+                            break;
+
+                        default:
+                            break;
+                    }
                 }
             }
             catch (Exception)
             {
                 //MessageBox.Show("PDF is Worng!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }    
+            }
+
+           
          
         }
 
-        public void createPDF(List<string> update, string path)
+        public void createPDF(List<string> name ,List<string> update, string path, int sprow, Boolean footer, string keyword)
         {
              
             Document doc = new Document(PageSize.A4, 5,5,12,12);
@@ -239,77 +379,62 @@ namespace MyConstruction
                     cell.HorizontalAlignment = Element.ALIGN_CENTER;
                     table.AddCell(cell);
 
-                    table.AddCell("Construction Name");
-                    cell = new PdfPCell(new Phrase(update[1], normal));
-                    cell.Colspan = 7;
-                    table.AddCell(cell);
+                    int j = 0;
+                    int length = update.Count;
 
-                    table.AddCell("Construction No.");
-                    cell = new PdfPCell(new Phrase(update[2], normal));
-                    cell.Colspan = 7;
-                    table.AddCell(cell);
+                    if (footer)
+                    {
+                        length--; ;
+                    }
 
-                    table.AddCell("Construction Site");
-                    cell = new PdfPCell(new Phrase(update[3], normal));
-                    cell.Colspan = 7;
-                    table.AddCell(cell);
+                    for (int i = 1; i < length; i++)
+                    {
+                        if(sprow == i)
+                        {
+                            table.AddCell(name[j]);
+                            cell = new PdfPCell(new Phrase("自", normal));
+                            cell.HorizontalAlignment = Element.ALIGN_CENTER;
 
-                    table.AddCell("Outline of Construction");
-                    cell = new PdfPCell(new Phrase(update[4], normal));
-                    cell.Colspan = 7;
-                    table.AddCell(cell);
+                            table.AddCell(cell);
+                            table.AddCell(new Phrase(update[i], normal));
 
+                            cell = new PdfPCell(new Phrase("至", normal));
+                            cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                            table.AddCell(cell);
+                            table.AddCell(update[i+1]);
 
-                    //FontSelector selector = new FontSelector();
-                    //selector.AddFont(FontFactory.GetFont(FontFactory.TIMES_ROMAN, 12));
-                    //selector.AddFont(FontFactory.GetFont("MSung-Light", "UniCNS-UCS2-H", BaseFont.NOT_EMBEDDED));
-                    //Phrase ph = selector.Process("你好");
-                    //doc.Add(new Paragraph(ph));
+                            cell = new PdfPCell(new Phrase("施工日数：", normal));
+                            cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                            table.AddCell(cell);
+                            table.AddCell(new Phrase(update[i+2], normal));
 
-                    table.AddCell("Construction period");
-                    cell = new PdfPCell(new Phrase("自", normal));
-                    cell.HorizontalAlignment = Element.ALIGN_CENTER;
-                    
-                    table.AddCell(cell);
-                    table.AddCell(new Phrase(update[5], normal));
+                            cell = new PdfPCell(new Phrase("Days", normal));
+                            cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                            table.AddCell(cell);
 
-                    cell = new PdfPCell(new Phrase("至", normal));
-                    cell.HorizontalAlignment = Element.ALIGN_CENTER;
-                    table.AddCell(cell);
-                    table.AddCell(update[6]);
+                            i = i + 2;
+                        }
+                        else
+                        {
+                            table.AddCell(name[j]);
+                            cell = new PdfPCell(new Phrase(update[i], normal));
+                            cell.Colspan = 7;
+                            table.AddCell(cell);
+                        }
+                        j++;
+                        
+                    }
 
-                    cell = new PdfPCell(new Phrase("施工日数：", normal));
-                    cell.HorizontalAlignment = Element.ALIGN_CENTER;
-                    table.AddCell(cell);
-                    table.AddCell(new Phrase(update[7], normal));
-
-                    cell = new PdfPCell(new Phrase("Days", normal));
-                    cell.HorizontalAlignment = Element.ALIGN_CENTER;
-                    table.AddCell(cell);
-
-                    table.AddCell("Estimate Amount");
-                    cell = new PdfPCell(new Phrase(update[8], normal));
-                    cell.Colspan = 7;
-                    table.AddCell(cell);
-
-                    table.AddCell("Phone");
-                    cell = new PdfPCell(new Phrase(update[9], normal));
-                    cell.Colspan = 7;
-                    table.AddCell(cell);
-
-                    table.AddCell("Reason for construction");
-                    cell = new PdfPCell(new Phrase(update[10], normal));
-                    cell.Colspan = 7;
-                    table.AddCell(cell);
-
-                    table.AddCell("Remarks");
-                    cell = new PdfPCell(new Phrase(update[11], normal));
-                    cell.Colspan = 7;
-                    table.AddCell(cell);
-
+                    if (footer)
+                    {
+                        cell = new PdfPCell(new Phrase(update[update.Count-1], normal));
+                        cell.Colspan = 8;
+                        cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                        table.AddCell(cell);
+                    }
 
                     doc.Add(table);
-
+                    doc.AddKeywords(keyword);
                     doc.Close();
                     System.Diagnostics.Process.Start(path);
 

@@ -34,6 +34,7 @@
             this.pbar = new System.Windows.Forms.ProgressBar();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnReset = new System.Windows.Forms.Button();
@@ -66,7 +67,6 @@
             this.lblPhone = new System.Windows.Forms.TextBox();
             this.startPicker = new System.Windows.Forms.DateTimePicker();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.lblTitle = new System.Windows.Forms.Label();
             this.panelbottom.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -145,6 +145,17 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(984, 65);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTitle.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblTitle.Location = new System.Drawing.Point(3, 0);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(978, 65);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // backgroundWorker
             // 
             this.backgroundWorker.WorkerReportsProgress = true;
@@ -212,10 +223,10 @@
             this.lblConName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblConName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.tableMain.SetColumnSpan(this.lblConName, 8);
-            this.lblConName.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblConName.Location = new System.Drawing.Point(239, 12);
+            this.lblConName.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblConName.Location = new System.Drawing.Point(239, 10);
             this.lblConName.Name = "lblConName";
-            this.lblConName.Size = new System.Drawing.Size(722, 23);
+            this.lblConName.Size = new System.Drawing.Size(722, 26);
             this.lblConName.TabIndex = 0;
             this.lblConName.TextChanged += new System.EventHandler(this.lblConName_TextChanged);
             // 
@@ -224,7 +235,7 @@
             this.lblConOutline.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.tableMain.SetColumnSpan(this.lblConOutline, 8);
             this.lblConOutline.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblConOutline.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblConOutline.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblConOutline.Location = new System.Drawing.Point(239, 119);
             this.lblConOutline.Name = "lblConOutline";
             this.lblConOutline.Size = new System.Drawing.Size(722, 58);
@@ -423,7 +434,7 @@
             this.lblRemark.BackColor = System.Drawing.Color.White;
             this.tableMain.SetColumnSpan(this.lblRemark, 8);
             this.lblRemark.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblRemark.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblRemark.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblRemark.Location = new System.Drawing.Point(239, 378);
             this.lblRemark.Name = "lblRemark";
             this.lblRemark.Size = new System.Drawing.Size(722, 84);
@@ -436,7 +447,7 @@
             this.lblReason.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.tableMain.SetColumnSpan(this.lblReason, 8);
             this.lblReason.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblReason.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblReason.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblReason.Location = new System.Drawing.Point(239, 294);
             this.lblReason.Name = "lblReason";
             this.lblReason.Size = new System.Drawing.Size(722, 78);
@@ -449,10 +460,10 @@
             this.lblConNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblConNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.tableMain.SetColumnSpan(this.lblConNo, 8);
-            this.lblConNo.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblConNo.Location = new System.Drawing.Point(239, 49);
+            this.lblConNo.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblConNo.Location = new System.Drawing.Point(239, 47);
             this.lblConNo.Name = "lblConNo";
-            this.lblConNo.Size = new System.Drawing.Size(722, 23);
+            this.lblConNo.Size = new System.Drawing.Size(722, 26);
             this.lblConNo.TabIndex = 1;
             this.lblConNo.TextChanged += new System.EventHandler(this.lblConNo_TextChanged);
             // 
@@ -461,10 +472,10 @@
             this.lblConSite.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblConSite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.tableMain.SetColumnSpan(this.lblConSite, 8);
-            this.lblConSite.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblConSite.Location = new System.Drawing.Point(239, 86);
+            this.lblConSite.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblConSite.Location = new System.Drawing.Point(239, 84);
             this.lblConSite.Name = "lblConSite";
-            this.lblConSite.Size = new System.Drawing.Size(722, 23);
+            this.lblConSite.Size = new System.Drawing.Size(722, 26);
             this.lblConSite.TabIndex = 2;
             this.lblConSite.TextChanged += new System.EventHandler(this.lblConSite_TextChanged);
             // 
@@ -472,10 +483,10 @@
             // 
             this.lblEstiAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableMain.SetColumnSpan(this.lblEstiAmount, 8);
-            this.lblEstiAmount.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblEstiAmount.Location = new System.Drawing.Point(239, 224);
+            this.lblEstiAmount.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblEstiAmount.Location = new System.Drawing.Point(239, 222);
             this.lblEstiAmount.Name = "lblEstiAmount";
-            this.lblEstiAmount.Size = new System.Drawing.Size(722, 23);
+            this.lblEstiAmount.Size = new System.Drawing.Size(722, 26);
             this.lblEstiAmount.TabIndex = 6;
             this.lblEstiAmount.TextChanged += new System.EventHandler(this.lblEstiAmount_TextChanged);
             // 
@@ -550,10 +561,10 @@
             // 
             this.lblPhone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableMain.SetColumnSpan(this.lblPhone, 8);
-            this.lblPhone.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblPhone.Location = new System.Drawing.Point(239, 261);
+            this.lblPhone.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblPhone.Location = new System.Drawing.Point(239, 259);
             this.lblPhone.Name = "lblPhone";
-            this.lblPhone.Size = new System.Drawing.Size(722, 23);
+            this.lblPhone.Size = new System.Drawing.Size(722, 26);
             this.lblPhone.TabIndex = 7;
             this.lblPhone.TextChanged += new System.EventHandler(this.lblPhone_TextChanged);
             // 
@@ -568,17 +579,6 @@
             this.startPicker.Size = new System.Drawing.Size(138, 23);
             this.startPicker.TabIndex = 4;
             this.startPicker.ValueChanged += new System.EventHandler(this.startPicker_ValueChanged);
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTitle.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblTitle.Location = new System.Drawing.Point(3, 0);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(978, 65);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // EditForm
             // 

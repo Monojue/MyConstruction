@@ -1,4 +1,5 @@
-﻿using System;
+﻿using iTextSharp.text.pdf;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,11 +16,13 @@ namespace MyConstruction
     {
         private Button currentButton;
         private Form activeForm;
-       
+        private Form selectedDForm;
+        private Form selectedEForm;
+
         public static string finaltext = "";
         public static Boolean editdatachanged = false;
         public static Boolean firsttime = true;
-        public static int lib = 0;
+        public static int lib = 1;
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
@@ -41,14 +44,27 @@ namespace MyConstruction
             this.FormBorderStyle = FormBorderStyle.None;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
 
-            if (MainForm.lib == 0)
+            if (MainForm.lib == 1)
             {
                 rdo1.Checked = true;
             }
-            else if (MainForm.lib == 1)
+            else if (MainForm.lib == 2)
             {
                 rdo2.Checked = true;
             }
+            else if (MainForm.lib == 3)
+            {
+                rdo3.Checked = true;
+            }
+            else if (MainForm.lib == 4)
+            {
+                rdo4.Checked = true;
+            }
+            else if (MainForm.lib == 5)
+            {
+                rdoexp.Checked = true;
+            }
+
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -121,13 +137,14 @@ namespace MyConstruction
             if (of.ShowDialog() == DialogResult.OK)
             {
                 path = of.FileName.ToString();
+                setFormUsingLib();
                 if (sender.Equals(btnEdit))
                 {
-                    OpenChildForm(new EditForm(), btnEdit);
+                    OpenChildForm(selectedEForm, btnEdit);
                 }
                 else
                 {
-                    OpenChildForm(new DisplayForm(), btnDisplay);
+                    OpenChildForm(selectedDForm, btnDisplay);
                 }
                 
             }
@@ -138,19 +155,21 @@ namespace MyConstruction
             if (finaltext.Equals(""))
             {
                 btnAdd_Click(sender, e);
+                setFormUsingLib();
             }
             else
             {
+                
                 if (editdatachanged)
                 {
                     if (MessageBox.Show("Your Changed Data will be lost!", "Are you sure?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
-                        OpenChildForm(new DisplayForm(), sender);
+                        OpenChildForm(selectedDForm, sender);
                     }
                 }
                 else
                 {
-                    OpenChildForm(new DisplayForm(), sender);
+                    OpenChildForm(selectedDForm, sender);
                 }
             }
         }
@@ -163,18 +182,34 @@ namespace MyConstruction
             }
             else
             {
-                OpenChildForm(new EditForm(), sender);
+                setFormUsingLib();
+                OpenChildForm(selectedEForm, sender);
             }
         }
 
         private void rdo1_CheckedChanged(object sender, EventArgs e)
         {
-            MainForm.lib = 0;
+            MainForm.lib = 1;
         }
 
         private void rdo2_CheckedChanged(object sender, EventArgs e)
         {
-            MainForm.lib = 1;
+            MainForm.lib = 2;
+        }
+
+        private void rdo3_CheckedChanged(object sender, EventArgs e)
+        {
+            MainForm.lib = 3;
+        }
+
+        private void rdo4_CheckedChanged(object sender, EventArgs e)
+        {
+            MainForm.lib = 4;
+        }
+
+        private void rdoexp_CheckedChanged(object sender, EventArgs e)
+        {
+            MainForm.lib = 5;
         }
 
         private void btnApply_Click(object sender, EventArgs e)
@@ -184,14 +219,75 @@ namespace MyConstruction
                 MainForm.finaltext = "";
                 editdatachanged = false;
                 firsttime = true;
+
+                setFormUsingLib();
+
+
                 if (currentButton == btnDisplay)
                 {
-                    OpenChildForm(new DisplayForm(), btnDisplay);
+                    OpenChildForm(selectedDForm, btnDisplay);
                 }
                 else if (currentButton == btnEdit)
                 {
-                    OpenChildForm(new EditForm(), btnEdit);
+                    OpenChildForm(selectedEForm, btnEdit);
                 }
+            }
+        }
+
+
+        private void setFormUsingLib() //change current form on lib data
+        {
+            switch (MainForm.lib)
+            {
+                case 1:
+                    selectedDForm = new DisplayForm();
+                    selectedEForm = new EditForm();
+                    break;
+
+                case 2:
+                    selectedDForm = new DisplayForm();
+                    selectedEForm = new EditForm();
+                    break;
+
+                case 3:
+                    selectedDForm = new D3Form();
+                    selectedEForm = new E3Form();
+                    break;
+
+                case 4:
+                    selectedDForm = new D4Form();
+                    selectedEForm = new E4Form();
+                    break;
+
+                case 5:
+                    try
+                    {
+                        PdfReader reader = new PdfReader(path);
+                        string s = reader.Info["Keywords"];
+
+                        if (s.Equals("12"))
+                        {
+                            selectedDForm = new DisplayForm();
+                            selectedEForm = new EditForm();
+                        }
+                        else if (s.Equals("3"))
+                        {
+                            selectedDForm = new D3Form();
+                            selectedEForm = new E3Form();
+                        }
+                        else if (s.Equals("4"))
+                        {
+                            selectedDForm = new D4Form();
+                            selectedEForm = new E4Form();
+                        }
+                    }
+                    catch(Exception)
+                    {
+                        selectedDForm = new DisplayForm();
+                        selectedEForm = new EditForm();
+                    }
+                    
+                    break;
             }
         }
     }

@@ -53,6 +53,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="D4Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="D4Form.Designer.cs">
+      <DependentUpon>D4Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="D3Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="D3Form.Designer.cs">
+      <DependentUpon>D3Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="E3Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="E3Form.Designer.cs">
+      <DependentUpon>E3Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="E4Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="E4Form.Designer.cs">
+      <DependentUpon>E4Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Method.cs" />
     <Compile Include="EditForm.cs">
       <SubType>Form</SubType>
@@ -86,6 +110,18 @@
     <Compile Include="setting.Designer.cs">
       <DependentUpon>setting.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="D4Form.resx">
+      <DependentUpon>D4Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="D3Form.resx">
+      <DependentUpon>D3Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="E3Form.resx">
+      <DependentUpon>E3Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="E4Form.resx">
+      <DependentUpon>E4Form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditForm.resx">
       <DependentUpon>EditForm.cs</DependentUpon>
     </EmbeddedResource>

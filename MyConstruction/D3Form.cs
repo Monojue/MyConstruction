@@ -7,18 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using iTextSharp.text.pdf;
-using iTextSharp.text.pdf.parser;
 
 namespace MyConstruction
 {
-    public partial class DisplayForm : Form
+    public partial class D3Form : Form
     {
-       
-        //List<string> sptext;
+
         Method method = new Method();
 
-        public DisplayForm()
+        public D3Form()
         {
             InitializeComponent();
             lblPath.Text = MainForm.path;
@@ -57,7 +54,6 @@ namespace MyConstruction
             method.putData();
             setData();
             btnCancel.Visible = false;
-            //MessageBox.Show("Complete", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -71,46 +67,30 @@ namespace MyConstruction
             try
             {
                 lblTitle.Text = Method.word[0];
-                lblConName.Text = Method.word[1];
-                lblConNo.Text = Method.word[2];
-                lblConSite.Text = Method.word[3];
-                lblConOutline.Text = Method.word[4];
-                lblEstiAmount.Text = Method.word[5];
-                lblPhone.Text = Method.word[6];
-                lblReason.Text = Method.word[7];
-                lblRemark.Text = Method.word[8];
+                lblConNo.Text = Method.word[1];
+                lblConName.Text = Method.word[2];
+                lblPhone.Text = Method.word[3];
+                lblRiverName.Text = Method.word[4];
+                lblPosition.Text = Method.word[5];
+                lblConEnf.Text = Method.word[6];
+                lblConOutline.Text = Method.word[7];
+                lblFooter.Text = Method.word[8];
 
                 startPicker.Value = DateTime.Now;
                 endPicker.Value = DateTime.Now.AddMonths(1);
                 lblTotalDate.Text = ((DateTime.Now.AddMonths(1) - DateTime.Now).TotalDays + 1).ToString();
             }
-            //catch(NullReferenceException ee)
-            //{
-            //    lblTitle.Text = "";
-            //    lblConName.Text = "";
-            //    lblConNo.Text = "";
-            //    lblConSite.Text = "";
-            //    lblConOutline.Text = "";
-            //    lblEstiAmount.Text = "";
-            //    lblPhone.Text = "";
-            //    lblReason.Text = "";
-            //    lblRemark.Text = "";
-
-            //    startPicker.Value = DateTime.Now;
-            //    endPicker.Value = DateTime.Now.AddMonths(1);
-            //    lblTotalDate.Text = ((DateTime.Now.AddMonths(1) - DateTime.Now).TotalDays + 1).ToString();
-            //}
-            catch (Exception e)
+            catch (Exception)
             {
                 lblTitle.Text = "";
-                lblConName.Text = "";
                 lblConNo.Text = "";
-                lblConSite.Text = "";
-                lblConOutline.Text = "";
-                lblEstiAmount.Text = "";
+                lblConName.Text = "";
                 lblPhone.Text = "";
-                lblReason.Text = "";
-                lblRemark.Text = "";
+                lblRiverName.Text = "";
+                lblPosition.Text = "";
+                lblConEnf.Text = "";
+                lblConOutline.Text = "";
+                lblFooter.Text = "";
 
                 startPicker.Value = DateTime.Now;
                 endPicker.Value = DateTime.Now.AddMonths(1);
@@ -125,7 +105,7 @@ namespace MyConstruction
             if (of.ShowDialog() == DialogResult.OK)
             {
                 MainForm.path = lblPath.Text = of.FileName.ToString();
-              
+
                 if (!backgroundWorker.IsBusy)
                 {
                     btnCancel.Visible = true;
@@ -138,37 +118,37 @@ namespace MyConstruction
         {
             List<string> name = new List<string>();
 
+            name.Add("Date");
+            name.Add("Construction No");
             name.Add("Construction Name");
-            name.Add("Construction No.");
-            name.Add("Construction Site");
-            name.Add("Outline of Construction");
-            name.Add("Construction period");
-            name.Add("Estimate Amount");
             name.Add("Phone");
-            name.Add("Reason for construction");
-            name.Add("Remarks");
+            name.Add("River Name");
+            name.Add("Position");
+            name.Add("Contract enforcement");
+            name.Add("Construction outline");
 
             List<string> update = new List<string>();
 
             update.Add(lblTitle.Text);
-            update.Add(lblConName.Text);
-            update.Add(lblConNo.Text);
-            update.Add(lblConSite.Text);
-            update.Add(lblConOutline.Text);
             update.Add(startPicker.Text);
             update.Add(endPicker.Text);
             update.Add(lblTotalDate.Text);
-            update.Add(lblEstiAmount.Text);
+            
+            update.Add(lblConNo.Text);
+            update.Add(lblConName.Text);
             update.Add(lblPhone.Text);
-            update.Add(lblReason.Text);
-            update.Add(lblRemark.Text);
-
+            update.Add(lblRiverName.Text);
+            update.Add(lblPosition.Text);
+            update.Add(lblConEnf.Text);
+            update.Add(lblConOutline.Text);
+            update.Add(lblFooter.Text);
+            
             string fname = lblPath.Text.ToString();
             saveFileDialog.FileName = fname.Substring(fname.LastIndexOf(@"\") + 1).Replace(".pdf", "") + "(Display)";
             saveFileDialog.Filter = "PDF files(*.pdf)|*.pdf";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                method.createPDF(name, update, saveFileDialog.FileName.ToString(),5, false ,"12");
+                method.createPDF(name, update, saveFileDialog.FileName.ToString(), 1, true, "3");
             }
         }
 
@@ -191,6 +171,5 @@ namespace MyConstruction
                 backgroundWorker.CancelAsync();
             }
         }
-
     }
 }

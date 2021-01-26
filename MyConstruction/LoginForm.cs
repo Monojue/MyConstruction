@@ -61,7 +61,7 @@ namespace MyConstruction
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if ((txtUserName.Text.Equals("User")) && (txtPassword.Text.Equals("User")))
+            if (!(txtUserName.Text.Equals("User")) && !(txtPassword.Text.Equals("User")))
             {
                 this.Hide();
                 MainForm mainform = new MainForm();
