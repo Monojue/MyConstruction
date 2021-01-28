@@ -14,9 +14,9 @@ namespace MyConstruction
     {
 
         string finaltext = MainForm.finaltext;
-        //List<string> sptext;
         Method method = new Method();
         Boolean firsttime = true;
+        Boolean error = false;
 
         public E4Form()
         {
@@ -80,10 +80,20 @@ namespace MyConstruction
                 lblConYear.Text = Method.word[9];
                 lblFooter.Text = Method.word[10];
 
-                startPicker.Value = DateTime.Now;
-                endPicker.Value = DateTime.Now.AddMonths(1);
-                lblTotalDate.Text = ((DateTime.Now.AddMonths(1) - DateTime.Now).TotalDays + 1).ToString();
+                if (MainForm.lib != 5)
+                {
+                    startPicker.Value = DateTime.Now;
+                    endPicker.Value = DateTime.Now.AddMonths(1);
+                    lblTotalDate.Text = ((DateTime.Now.AddMonths(1) - DateTime.Now).TotalDays + 1).ToString();
+                }
+                else
+                {
+                    startPicker.Value = DateTime.Parse(Method.word[11]);
+                    endPicker.Value = DateTime.Parse(Method.word[12]);
+                    lblTotalDate.Text = Method.word[13];
+                }
                 firsttime = false;
+                error = false;
             }
             catch (Exception)
             {
@@ -104,12 +114,42 @@ namespace MyConstruction
             }
         }
 
+        public void checkError()
+        {
+            Boolean a, b;
+            if (lblTotalDate.Text.Contains("-"))
+            {
+                lblTotalDate.BackColor = Color.LightPink;
+                a = true;
+            }
+            else
+            {
+                lblTotalDate.BackColor = Color.FromArgb(192, 192, 255);
+                a = false;
+            }
+
+            if (!lblPhone.Text.Equals(string.Empty) && lblPhone.Text.Length < 8 || !method.isdigit(lblPhone.Text))
+            {
+                lblPhone.BackColor = Color.LightPink;
+                b = true;
+            }
+            else
+            {
+                lblPhone.BackColor = Color.White;
+                b = false;
+            }
+
+            error = a | b;
+        }
+
         private void startPicker_ValueChanged(object sender, EventArgs e)
         {
             if (!firsttime)
                 MainForm.editdatachanged = true;
 
-            lblTotalDate.Text = Math.Round((endPicker.Value - startPicker.Value).TotalDays + 1).ToString();
+            lblTotalDate.Text = method.dateDifferent((endPicker.Value - startPicker.Value).TotalDays);
+
+            checkError();
         }
 
         private void endPicker_ValueChanged(object sender, EventArgs e)
@@ -117,49 +157,57 @@ namespace MyConstruction
             if (!firsttime)
                 MainForm.editdatachanged = true;
 
-            lblTotalDate.Text = Math.Round((endPicker.Value - startPicker.Value).TotalDays + 1).ToString();
+            lblTotalDate.Text = method.dateDifferent((endPicker.Value - startPicker.Value).TotalDays);
+
+            checkError();
         }
 
         private void btnDownload_Click(object sender, EventArgs e)
         {
-            List<string> name = new List<string>();
-
-            name.Add("Date");
-            name.Add("Construction Name");
-            name.Add("Business Name");
-            name.Add("Constructor Name");
-            name.Add("Phone");
-            name.Add("Designer Name");
-            name.Add("Factory Place");
-            name.Add("Construction Number");
-            name.Add("Unit Price Appropriate land");
-            name.Add("Construction year");
-
-
-            List<string> update = new List<string>();
-
-            update.Add(lblTitle.Text);
-            update.Add(startPicker.Text);
-            update.Add(endPicker.Text);
-            update.Add(lblTotalDate.Text);
-
-            update.Add(lblConName.Text);
-            update.Add(lblBusName.Text);
-            update.Add(lblContorName.Text);
-            update.Add(lblPhone.Text);
-            update.Add(lblDesName.Text);
-            update.Add(lblFactoryPlace.Text);
-            update.Add(lblConNumber.Text);
-            update.Add(lblUPAL.Text);
-            update.Add(lblConYear.Text);
-            update.Add(lblFooter.Text);
-
-            string fname = lblPath.Text.ToString();
-            saveFileDialog.FileName = fname.Substring(fname.LastIndexOf(@"\") + 1).Replace(".pdf", "") + "(Edit)";
-            saveFileDialog.Filter = "PDF files(*.pdf)|*.pdf";
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            if (!error)
             {
-                method.createPDF(name, update, saveFileDialog.FileName.ToString(), 1, true, "4");
+                List<string> name = new List<string>();
+
+                name.Add("Date");
+                name.Add("Construction Name");
+                name.Add("Business Name");
+                name.Add("Constructor Name");
+                name.Add("Phone");
+                name.Add("Designer Name");
+                name.Add("Factory Place");
+                name.Add("Construction Number");
+                name.Add("Unit Price Appropriate land");
+                name.Add("Construction year");
+
+                List<string> update = new List<string>();
+
+                update.Add(lblTitle.Text);
+                update.Add(startPicker.Text);
+                update.Add(endPicker.Text);
+                update.Add(lblTotalDate.Text);
+
+                update.Add(lblConName.Text);
+                update.Add(lblBusName.Text);
+                update.Add(lblContorName.Text);
+                update.Add(lblPhone.Text);
+                update.Add(lblDesName.Text);
+                update.Add(lblFactoryPlace.Text);
+                update.Add(lblConNumber.Text);
+                update.Add(lblUPAL.Text);
+                update.Add(lblConYear.Text);
+                update.Add(lblFooter.Text);
+
+                string fname = lblPath.Text.ToString();
+                saveFileDialog.FileName = fname.Substring(fname.LastIndexOf(@"\") + 1).Replace(".pdf", "") + "(Edit)";
+                saveFileDialog.Filter = "PDF files(*.pdf)|*.pdf";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    method.createPDF(name, update, saveFileDialog.FileName.ToString(), 1, true, "4");
+                }
+            }
+            else
+            {
+                MessageBox.Show(this, "Please Make sure there is no Error!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -205,6 +253,8 @@ namespace MyConstruction
         {
             if (!firsttime)
                 MainForm.editdatachanged = true;
+
+            checkError();
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)

@@ -13,6 +13,7 @@ namespace MyConstruction
     public partial class D4Form : Form
     {
         Method method = new Method();
+        Boolean error = false;
 
         public D4Form()
         {
@@ -65,7 +66,7 @@ namespace MyConstruction
         {
             try
             {
-                lblTitle.Text = Method.word[0];
+                 lblTitle.Text = Method.word[0];
                 lblConName.Text = Method.word[1];
                 lblBusName.Text = Method.word[2];
                 lblContorName.Text = Method.word[3];
@@ -77,9 +78,19 @@ namespace MyConstruction
                 lblConYear.Text = Method.word[9];
                 lblFooter.Text = Method.word[10];
 
-                startPicker.Value = DateTime.Now;
-                endPicker.Value = DateTime.Now.AddMonths(1);
-                lblTotalDate.Text = ((DateTime.Now.AddMonths(1) - DateTime.Now).TotalDays + 1).ToString();
+                if (MainForm.lib != 5)
+                {
+                    startPicker.Value = DateTime.Now;
+                    endPicker.Value = DateTime.Now.AddMonths(1);
+                    lblTotalDate.Text = ((DateTime.Now.AddMonths(1) - DateTime.Now).TotalDays + 1).ToString();
+                }
+                else
+                {
+                    startPicker.Value = DateTime.Parse(Method.word[11]);
+                    endPicker.Value = DateTime.Parse(Method.word[12]);
+                    lblTotalDate.Text = Method.word[13];
+                }            
+                error = false;
             }
             catch (Exception)
             {
@@ -119,55 +130,84 @@ namespace MyConstruction
 
         private void btnDownload_Click(object sender, EventArgs e)
         {
-            List<string> name = new List<string>();
-
-            name.Add("Date");
-            name.Add("Construction Name");
-            name.Add("Business Name");
-            name.Add("Constructor Name");
-            name.Add("Phone");
-            name.Add("Designer Name");
-            name.Add("Factory Place");
-            name.Add("Construction Number");
-            name.Add("Unit Price Appropriate land");
-            name.Add("Construction year");
-            
-
-            List<string> update = new List<string>();
-
-            update.Add(lblTitle.Text);
-            update.Add(startPicker.Text);
-            update.Add(endPicker.Text);
-            update.Add(lblTotalDate.Text);
-
-            update.Add(lblConName.Text);
-            update.Add(lblBusName.Text);
-            update.Add(lblContorName.Text);
-            update.Add(lblPhone.Text);
-            update.Add(lblDesName.Text);
-            update.Add(lblFactoryPlace.Text);
-            update.Add(lblConNumber.Text);
-            update.Add(lblUPAL.Text);
-            update.Add(lblConYear.Text);
-            update.Add(lblFooter.Text);
-
-            string fname = lblPath.Text.ToString();
-            saveFileDialog.FileName = fname.Substring(fname.LastIndexOf(@"\") + 1).Replace(".pdf", "") + "(Display)";
-            saveFileDialog.Filter = "PDF files(*.pdf)|*.pdf";
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            if (!error)
             {
-                method.createPDF(name, update, saveFileDialog.FileName.ToString(), 1, true, "4");
+                List<string> name = new List<string>();
+
+                name.Add("Date");
+                name.Add("Construction Name");
+                name.Add("Business Name");
+                name.Add("Constructor Name");
+                name.Add("Phone");
+                name.Add("Designer Name");
+                name.Add("Factory Place");
+                name.Add("Construction Number");
+                name.Add("Unit Price Appropriate land");
+                name.Add("Construction year");
+
+
+                List<string> update = new List<string>();
+
+                update.Add(lblTitle.Text);
+                update.Add(startPicker.Text);
+                update.Add(endPicker.Text);
+                update.Add(lblTotalDate.Text);
+
+                update.Add(lblConName.Text);
+                update.Add(lblBusName.Text);
+                update.Add(lblContorName.Text);
+                update.Add(lblPhone.Text);
+                update.Add(lblDesName.Text);
+                update.Add(lblFactoryPlace.Text);
+                update.Add(lblConNumber.Text);
+                update.Add(lblUPAL.Text);
+                update.Add(lblConYear.Text);
+                update.Add(lblFooter.Text);
+
+                string fname = lblPath.Text.ToString();
+                saveFileDialog.FileName = fname.Substring(fname.LastIndexOf(@"\") + 1).Replace(".pdf", "") + "(Display)";
+                saveFileDialog.Filter = "PDF files(*.pdf)|*.pdf";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    method.createPDF(name, update, saveFileDialog.FileName.ToString(), 1, true, "4");
+                }
+            }
+            else
+            {
+                MessageBox.Show(this, "Please Make sure there is no Error!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void startPicker_ValueChanged(object sender, EventArgs e)
         {
-            lblTotalDate.Text = Math.Round((endPicker.Value - startPicker.Value).TotalDays + 1).ToString();
+            lblTotalDate.Text = method.dateDifferent((endPicker.Value - startPicker.Value).TotalDays);
+
+            if (lblTotalDate.Text.Contains("-"))
+            {
+                lblTotalDate.BackColor = Color.LightPink;
+                error = true;
+            }
+            else
+            {
+                lblTotalDate.BackColor = Color.FromArgb(192, 192, 255);
+                error = false;
+            }
         }
 
         private void endPicker_ValueChanged(object sender, EventArgs e)
         {
-            lblTotalDate.Text = Math.Round((endPicker.Value - startPicker.Value).TotalDays + 1).ToString();
+            lblTotalDate.Text = method.dateDifferent((endPicker.Value - startPicker.Value).TotalDays);
+
+            if (lblTotalDate.Text.Contains("-"))
+            {
+                lblTotalDate.BackColor = Color.LightPink;
+                error = true;
+            }
+            else
+            {
+                lblTotalDate.BackColor = Color.FromArgb(192, 192, 255);
+                error = false;
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

@@ -38,6 +38,36 @@ namespace MyConstruction
             dataextract(MainForm.finaltext);
         }
 
+        public Boolean isdigit(string data)
+        {
+
+            char[] cdata = data.ToCharArray();
+
+            foreach(char c in cdata)
+            {
+                if (!Char.IsDigit(c))
+                    return false;
+            }
+
+            return true;
+        }
+
+        public string dateDifferent(double noOfDate)
+        {
+            double i = Math.Round(noOfDate + 1);
+
+            if (i > 0)
+            {
+                i = Math.Round(noOfDate + 1);
+            }
+            else
+            {
+                i = Math.Round(noOfDate);
+            }
+
+            return i.ToString();
+        }
+
         public void iTextSharp(BackgroundWorker backgroundWorker, string path)
         {
             using (PdfReader reader = new PdfReader(path))
@@ -65,6 +95,28 @@ namespace MyConstruction
             line = data.Split(new[] { "\n" }, StringSplitOptions.None).ToList();
         }
 
+        public static List<string> periodSpliter(string key)
+        {
+            List<string> list = new List<string>();
+
+            try
+            {
+                for (int i = 0; i < line.Count; i++)
+                {
+                    if (line[i].Contains(key))
+                    {
+                        list.Add(line[i].Substring(line[i].IndexOf("自") + 2, 10));
+                        list.Add(line[i].Substring(line[i].IndexOf("至") + 2, 10));
+                        list.Add(line[i].Substring(line[i].IndexOf("施工日数：") + 6).Replace("Days", ""));
+                    }
+                }
+                return list;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
         public static string getdataup(string key)
         {
             try
@@ -231,7 +283,7 @@ namespace MyConstruction
                     word.Add(getdataline("Estimate Amount"));      // amount
                     word.Add(getdataline("Phone"));      // phone
                     word.Add(getdataline("Reason for construction"));      // reson
-                    word.Add(getdatablock("Remarks", string.Empty)); // remarks
+                    word.Add(getdatablock("Remarks", string.Empty)); // remarks                  
                 }
                 else if (MainForm.lib == 2)
                 { 
@@ -296,6 +348,10 @@ namespace MyConstruction
                             word.Add(getdataline("Phone"));      // phone
                             word.Add(getdataline("Reason for construction"));      // reson
                             word.Add(getdatablock("Remarks", string.Empty)); // remarks
+
+                            word.Add(periodSpliter("Construction period")[0]);
+                            word.Add(periodSpliter("Construction period")[1]);
+                            word.Add(periodSpliter("Construction period")[2]);
                             break;
 
 
@@ -311,6 +367,10 @@ namespace MyConstruction
                             word.Add(getdataline("Contract enforcement"));
                             word.Add(getdatablock("Construction outline", line[line.Count-1]));
                             word.Add(line[line.Count - 1]);
+
+                            word.Add(periodSpliter("Date")[0]);
+                            word.Add(periodSpliter("Date")[1]);
+                            word.Add(periodSpliter("Date")[2]);
                             break;
 
 
@@ -328,6 +388,10 @@ namespace MyConstruction
                             word.Add(getdataline("Unit Price Appropriate land"));
                             word.Add(getdataline("Construction year"));
                             word.Add(line[line.Count - 1]);
+
+                            word.Add(periodSpliter("Date")[0]);
+                            word.Add(periodSpliter("Date")[1]);
+                            word.Add(periodSpliter("Date")[2]);
                             break;
 
                         default:

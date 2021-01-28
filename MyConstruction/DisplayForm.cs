@@ -15,8 +15,8 @@ namespace MyConstruction
     public partial class DisplayForm : Form
     {
        
-        //List<string> sptext;
         Method method = new Method();
+        Boolean error = false;
 
         public DisplayForm()
         {
@@ -80,9 +80,19 @@ namespace MyConstruction
                 lblReason.Text = Method.word[7];
                 lblRemark.Text = Method.word[8];
 
-                startPicker.Value = DateTime.Now;
-                endPicker.Value = DateTime.Now.AddMonths(1);
-                lblTotalDate.Text = ((DateTime.Now.AddMonths(1) - DateTime.Now).TotalDays + 1).ToString();
+                if (MainForm.lib != 5)
+                {
+                    startPicker.Value = DateTime.Now;
+                    endPicker.Value = DateTime.Now.AddMonths(1);
+                    lblTotalDate.Text = ((DateTime.Now.AddMonths(1) - DateTime.Now).TotalDays + 1).ToString();
+                }
+                else
+                {
+                    startPicker.Value = DateTime.Parse(Method.word[9]);
+                    endPicker.Value = DateTime.Parse(Method.word[10]);
+                    lblTotalDate.Text = Method.word[11];
+                }
+                error = false;
             }
             //catch(NullReferenceException ee)
             //{
@@ -100,7 +110,7 @@ namespace MyConstruction
             //    endPicker.Value = DateTime.Now.AddMonths(1);
             //    lblTotalDate.Text = ((DateTime.Now.AddMonths(1) - DateTime.Now).TotalDays + 1).ToString();
             //}
-            catch (Exception e)
+            catch (Exception)
             {
                 lblTitle.Text = "";
                 lblConName.Text = "";
@@ -136,50 +146,79 @@ namespace MyConstruction
 
         private void btnDownload_Click(object sender, EventArgs e)
         {
-            List<string> name = new List<string>();
-
-            name.Add("Construction Name");
-            name.Add("Construction No.");
-            name.Add("Construction Site");
-            name.Add("Outline of Construction");
-            name.Add("Construction period");
-            name.Add("Estimate Amount");
-            name.Add("Phone");
-            name.Add("Reason for construction");
-            name.Add("Remarks");
-
-            List<string> update = new List<string>();
-
-            update.Add(lblTitle.Text);
-            update.Add(lblConName.Text);
-            update.Add(lblConNo.Text);
-            update.Add(lblConSite.Text);
-            update.Add(lblConOutline.Text);
-            update.Add(startPicker.Text);
-            update.Add(endPicker.Text);
-            update.Add(lblTotalDate.Text);
-            update.Add(lblEstiAmount.Text);
-            update.Add(lblPhone.Text);
-            update.Add(lblReason.Text);
-            update.Add(lblRemark.Text);
-
-            string fname = lblPath.Text.ToString();
-            saveFileDialog.FileName = fname.Substring(fname.LastIndexOf(@"\") + 1).Replace(".pdf", "") + "(Display)";
-            saveFileDialog.Filter = "PDF files(*.pdf)|*.pdf";
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            if (!error)
             {
-                method.createPDF(name, update, saveFileDialog.FileName.ToString(),5, false ,"12");
+                List<string> name = new List<string>();
+
+                name.Add("Construction Name");
+                name.Add("Construction No.");
+                name.Add("Construction Site");
+                name.Add("Outline of Construction");
+                name.Add("Construction period");
+                name.Add("Estimate Amount");
+                name.Add("Phone");
+                name.Add("Reason for construction");
+                name.Add("Remarks");
+
+                List<string> update = new List<string>();
+
+                update.Add(lblTitle.Text);
+                update.Add(lblConName.Text);
+                update.Add(lblConNo.Text);
+                update.Add(lblConSite.Text);
+                update.Add(lblConOutline.Text);
+                update.Add(startPicker.Text);
+                update.Add(endPicker.Text);
+                update.Add(lblTotalDate.Text);
+                update.Add(lblEstiAmount.Text);
+                update.Add(lblPhone.Text);
+                update.Add(lblReason.Text);
+                update.Add(lblRemark.Text);
+
+                string fname = lblPath.Text.ToString();
+                saveFileDialog.FileName = fname.Substring(fname.LastIndexOf(@"\") + 1).Replace(".pdf", "") + "(Display)";
+                saveFileDialog.Filter = "PDF files(*.pdf)|*.pdf";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    method.createPDF(name, update, saveFileDialog.FileName.ToString(), 5, false, "12");
+                }
+            }
+            else
+            {
+                MessageBox.Show(this, "Please Make sure there is no Error!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void startPicker_ValueChanged(object sender, EventArgs e)
         {
-            lblTotalDate.Text = Math.Round((endPicker.Value - startPicker.Value).TotalDays + 1).ToString();
+            lblTotalDate.Text = method.dateDifferent((endPicker.Value - startPicker.Value).TotalDays);
+
+            if (lblTotalDate.Text.Contains("-"))
+            {
+                lblTotalDate.BackColor = Color.LightPink;
+                error = true;
+            }
+            else
+            {
+                lblTotalDate.BackColor = Color.FromArgb(192, 192, 255);
+                error = false;
+            }
         }
 
         private void endPicker_ValueChanged(object sender, EventArgs e)
         {
-            lblTotalDate.Text = Math.Round((endPicker.Value - startPicker.Value).TotalDays + 1).ToString();
+            lblTotalDate.Text = method.dateDifferent((endPicker.Value - startPicker.Value).TotalDays);
+
+            if (lblTotalDate.Text.Contains("-"))
+            {
+                lblTotalDate.BackColor = Color.LightPink;
+                error = true;
+            }
+            else
+            {
+                lblTotalDate.BackColor = Color.FromArgb(192, 192, 255);
+                error = false;
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
